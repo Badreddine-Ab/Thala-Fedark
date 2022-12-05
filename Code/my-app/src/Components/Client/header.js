@@ -1,11 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
-  const navigate = useNavigate();
-  function logOut() {
-    localStorage.clear();
-    navigate("/login");
-  }
+//   const navigate = useNavigate();
+//   function logOut() {
+//     localStorage.clear();
+//     navigate("/login");
+//   }
   return (
     <>
       
