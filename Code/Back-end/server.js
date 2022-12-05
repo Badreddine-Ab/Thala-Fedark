@@ -1,4 +1,6 @@
 require('dotenv').config()
+const connectDb = require('./Config/DbConfig')
+
 const errRoute = require('./Middlewares/AuthMiddlewares')
 
 const apiError = require('./Utils/ErrorUtils')
@@ -8,6 +10,8 @@ const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const express = require('express');
 const router = require('./Routes/authRouter')
+
+connectDb()
 
 const app = express()
 
