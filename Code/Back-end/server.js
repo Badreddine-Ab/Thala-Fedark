@@ -1,5 +1,7 @@
 require('dotenv').config()
-const connectDb = require('./Config/DbConfig')
+const {connectDb} = require('./Config/DbConfig')
+const userModel = require('./Models/userModel')
+const roleuserModel = require('./Models/roleUserModel')
 
 const errRoute = require('./Middlewares/AuthMiddlewares')
 
