@@ -1,7 +1,6 @@
 require('dotenv').config()
 const {connectDb} = require('./Config/DbConfig')
 const userModel = require('./Models/userModel')
-const roleuserModel = require('./Models/roleUserModel')
 
 const errRoute = require('./Middlewares/AuthMiddlewares')
 
@@ -13,7 +12,13 @@ const cookieParser = require("cookie-parser");
 const express = require('express');
 const router = require('./Routes/authRouter')
 
-connectDb()
+const creatRoleDefalut = require('./Utils/creatRoleDefault')
+
+async function init() {
+    await connectDb()
+    await creatRoleDefalut()
+}
+init()
 
 const app = express()
 
