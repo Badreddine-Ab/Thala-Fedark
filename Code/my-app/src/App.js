@@ -2,7 +2,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Accueil from './Pages/Client/accueil';
-import PageProcuct from './Components/Client/product';
 
 
 
@@ -12,8 +11,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Accueil />} />
-          <Route path="/PageProcuct" element={<PageProcuct />} />
-
         </Routes>
       </BrowserRouter>
     </h1>

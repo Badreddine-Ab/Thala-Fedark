@@ -1,58 +1,110 @@
 // import { Link, useNavigate } from "react-router-dom";
 
-function Header() {
-//   const navigate = useNavigate();
-//   function logOut() {
-//     localStorage.clear();
-//     navigate("/login");
-//   }
+export default function Header() {
+  //   const navigate = useNavigate();
+  //   function logOut() {
+  //     localStorage.clear();
+  //     navigate("/login");
+  //   }
   return (
     <>
-      
+    
       <div>
-                      
-                    <nav className="bg-white shadow">
-            <div className="container mx-auto px-6 py-3 md:flex md:justify-between md:items-center">
-              <div className="flex justify-between items-center">
-                <div>
-                  <a className="text-yellow-300 text-xl font-bold md:text-2xl hover:text-gray-700 no- " href="">Brand</a>
-                </div>
-
-                <div className="flex md:hidden">
-                  <button type="button" className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu">
-                    <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
-                      <path fillRule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <div className="md:flex items-center">
-                <div className="flex flex-col md:flex-row md:mx-6">
-                  <a className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="#">Home</a>
-                  <a className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="#">Shop</a>
-                  <a className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="#">Contact</a>
-                  <a className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0" href="#">About</a>
-                </div>
-
-                <div className="flex justify-center md:block">
-                  <a className="relative text-gray-700 hover:text-gray-600" href="">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.70711 15.2929C4.07714 15.9229 4.52331 17 5.41421 17H17M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-
-                    <span className="absolute top-0 left-0 rounded-full bg-yellow-300 text-white p-1 text-xs"></span>
-                  </a>
-                </div>
-              </div>
+      <div>
+      <header class="py-4 shadow-sm bg-white">
+        <div class="container flex items-center justify-between">
+            <span className="text-primary">THALA</span>
+            <div class="w-full max-w-xl relative flex">
+                <span class="absolute left-4 top-3 text-lg text-gray-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" name="search" id="search"
+                    class="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none"
+                    placeholder="search" />
+                <button
+                    class="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition">Search</button>
             </div>
-          </nav>
-          
 
-          </div>
-        
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <div class="text-xs leading-3">Wishlist</div>
+                    <div
+                        class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                        8</div>
+                </a>
+                <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div class="text-xs leading-3">Cart</div>
+                    <div
+                        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                        2</div>
+                </a>
+                <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <div class="text-xs leading-3">Account</div>
+                </a>
+            </div>
+        </div>
+    </header>
+   
+    <nav class="bg-gray-800">
+        <div class="container flex">
+            <div class="px-8 py-4 bg-primary flex items-center cursor-pointer relative group">
+                <span class="text-white">
+                    <i class="fa-solid fa-bars"></i>
+                </span>
+                <span class="capitalize ml-2 text-white">All Categories</span>
+
+                <div
+                    class="absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
+                    <a href="#" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                        {/* <img src={require('../../images/assets/images/icons/sofa.svg')} alt="sofa" class="w-5 h-5 object-contain" /> */}
+                        <span class="ml-6 text-gray-600 text-sm">Sofa</span>
+                    </a>
+                    <a href="#" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                        <img src="assets/images/icons/terrace.svg" alt="terrace" class="w-5 h-5 object-contain" />
+                        <span class="ml-6 text-gray-600 text-sm">Terarce</span>
+                    </a>
+                    <a href="#" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                        <img src="assets/images/icons/bed.svg" alt="bed" class="w-5 h-5 object-contain" />
+                        <span class="ml-6 text-gray-600 text-sm">Bed</span>
+                    </a>
+                    <a href="#" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                        <img src="assets/images/icons/office.svg" alt="office" class="w-5 h-5 object-contain" />
+                        <span class="ml-6 text-gray-600 text-sm">office</span>
+                    </a>
+                    <a href="#" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                        <img src="assets/images/icons/outdoor-cafe.svg" alt="outdoor" class="w-5 h-5 object-contain" />
+                        <span class="ml-6 text-gray-600 text-sm">Outdoor</span>
+                    </a>
+                    <a href="#" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
+                        <img src="assets/images/icons/bed-2.svg" alt="Mattress" class="w-5 h-5 object-contain" />
+                        <span class="ml-6 text-gray-600 text-sm">Mattress</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between flex-grow pl-12">
+                <div class="flex items-center space-x-6 capitalize">
+                    <a href="index.html" class="text-gray-200 hover:text-white transition">Home</a>
+                    <a href="pages/shop.html" class="text-gray-200 hover:text-white transition">Shop</a>
+                    <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
+                    <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
+                </div>
+                <a href="pages/login.html" class="text-gray-200 hover:text-white transition">Login</a>
+            </div>
+        </div>
+    </nav>
+      </div>
+      </div>
     </>
   );
 }
 
-export default Header;

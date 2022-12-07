@@ -1,6 +1,4 @@
-import React from 'react'
-
-function PageProcuct
+export default function PageProcuct
 () {
   return (
     <div>
@@ -118,4 +116,3 @@ function PageProcuct
   )
 }
 
-export default PageProcuct
