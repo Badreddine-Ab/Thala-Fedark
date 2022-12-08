@@ -1,5 +1,6 @@
 require('dotenv').config()
 const {connectDb} = require('./Config/DbConfig')
+const {graphqlHTTP} = require('express-graphql')
 const userModel = require('./Models/userModel')
 const roleuserModel = require('./Models/roleUserModel')
 
@@ -20,6 +21,11 @@ const app = express()
 app.use(cookieParser());
 app.use(cors({ origin:true, credentials:true }));
 app.use(express.json())
+app.use('/graphql', graphqlHTTP({
+    // schema: schema,
+    pretty: true,
+    graphiql : true
+}))
 app.use('/api/auth',router)
 app.use(errRoute)
 
