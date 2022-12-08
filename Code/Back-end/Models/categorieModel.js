@@ -1,12 +1,12 @@
-import Sequelize from 'sequelize'
-const sequelize = new Sequelize(`postgres://localhost:5432/Thela_fdark`)
+const Sequelize = require('sequelize');
+const {db} = require('../Config/DbConfig');
 
-const Categorie = sequelize.define('categorie', {
-    // attributes
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false
-    }
-  })
+const categorie = db.define('categorie', {
+    name : {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+})
 
-export default sequelize;
+module.exports = categorie
+
