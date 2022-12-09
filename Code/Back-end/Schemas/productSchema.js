@@ -58,3 +58,27 @@ const Product = new GraphQLObjectType({
         }
     }
 });
+
+const Query = new GraphQLObjectType({
+    name: 'Query',
+    description: 'this is a root query',
+    fields: () => {
+      return {
+        products: {
+          type: new GraphQLList(Product),
+          args: {
+            id: {
+              type: GraphQLInt
+            },
+            firstName: {
+              type: GraphQLString
+            }
+          },
+          //validations can go here
+          resolve(root, args) {
+            return db.models.user.findAll({ where: args })
+          }
+        }
+      }
+    }
+  })
