@@ -1,36 +1,32 @@
-import Sequelize from 'sequelize'
-const sequelize = new Sequelize(`postgres://localhost:5432/Thela_fdark`)
+const Sequelize = require('sequelize');
+const {db} = require('../Config/DbConfig');
+const promotion = require('../Models/promotionModel')
 
-const Product = sequelize.define('product', {
-    // attributes
-    name: {
-      type: Sequelize.STRING,
-      allowNull: false
+const product = db.define('product', {
+    name : {
+        type: Sequelize.STRING 
     },
     description : {
-        type : Sequelize.STRING,
-        allowNull: false 
+        type: Sequelize.STRING
     },
     prix : {
-        type : Sequelize.FLOAT,
-        allowNull : false
+        type : Sequelize.FLOAT
     },
     stock : {
-        type : Sequelize.INTEGER,
-        allowNull : true
+        type : Sequelize.INTEGER
     },
     ventes : {
-        type : Sequelize.INTEGER,
-        allowNull : true,
+        type : Sequelize.INTEGER
     },
     ventes_promo : {
-        type : Sequelize.INTEGER,
-        allowNull : true,
+        type : Sequelize.INTEGER
     },
-    images : {
-        type : Sequelize.ARRAY,
-        allowNull:true
-    }
-  })
+    images: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+   }
+})
 
-export default sequelize;
+promotion.hasMany(product)
+product.belongsTo(promotion)
+
+module.exports = product
