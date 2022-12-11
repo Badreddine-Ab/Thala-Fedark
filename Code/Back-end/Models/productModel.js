@@ -4,25 +4,32 @@ const promotion = require('../Models/promotionModel')
 
 const product = db.define('product', {
     name : {
-        type: Sequelize.STRING 
+        type: Sequelize.STRING,
+        allowNull: false
     },
     description : {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     prix : {
-        type : Sequelize.FLOAT
+        type : Sequelize.FLOAT,
+        allowNull: false
     },
     stock : {
-        type : Sequelize.INTEGER
+        type : Sequelize.INTEGER,
+        allowNull: true
     },
     ventes : {
-        type : Sequelize.INTEGER
+        type : Sequelize.INTEGER,
+        allowNull: true
     },
     ventes_promo : {
-        type : Sequelize.INTEGER
+        type : Sequelize.INTEGER,
+        allowNull: true
     },
     images: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        allowNull: true
    }
 })
 
