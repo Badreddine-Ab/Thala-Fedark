@@ -3,7 +3,12 @@ const User = require('../Models/userModel');
 const Role = require('../Models/roleUserModel');
 const bycrpt = require('bcryptjs');
 const crypto = require('crypto');
-const { sendEmail } = require('../Utils/sendEmail');
+const generateToken = require('../Utils/generateToken')
+const ls = require('local-storage');
+const jwt = require('jsonwebtoken');
+const { sendEmail, forgetPassword } = require('../Utils/sendEmail');
+
+
 
 
 const typeDefs = gql`
@@ -23,6 +28,9 @@ const typeDefs = gql`
     }
     type Mutation{
         signup(name : String!, email : String! , password : String!, role : String!) : User
+        login(email : String!, password : String!) : AuthPayload
+        foregetPassword(email : String!) : String
+
     }
 `;
 
@@ -60,7 +68,77 @@ const resolvers = {
             } catch (error) {
                 throw error;
             }
-        }
+        },
+        // login: async (_, args) => {
+        //     try {
+        //         const { email, password } = args;
+        //         if (!email || !password) {
+        //             throw new Error('Please enter all fields');
+        //         }
+        //         const user = await User.findOne({ where: { email } });
+        //         if (!user) {
+        //             throw new Error('User not exist');
+        //         }
+        //         const isMatch = await bycrpt.compare(password, user.password);
+        //         if (!isMatch) {
+        //             throw new Error('Invalid password');
+        //         }
+        //         if (user && isMatch && !user.isVerified) {
+        //             throw new Error('Please verify your email');
+        //         }
+        //         if (user && isMatch && user.isVerified) {
+        //             var token = generateToken(user.id, user.email, user.name);
+        //             ls('token', token);
+        //         }
+        //         return { user, token };
+        //     } catch (error) {
+        //         throw error;
+        //     }
+        // },
+        login: async (_, args) => {
+            try {
+                const { email, password } = args;
+                if (!email || !password) {
+                    throw new Error('Please enter all fields');
+                }
+                const user = await User.findOne({ where: { email } });
+                if (!user) {
+                    throw new Error('User not exist');
+                }
+                const isMatch = await bycrpt.compare(password, user.password);
+                if (!isMatch) {
+                    throw new Error('Invalid password');
+                }
+                if (user && isMatch && !user.isVerified) {
+                    throw new Error('Please verify your email');
+                }
+                if (user && isMatch && user.isVerified) {
+                    var token = generateToken(user.id, user.email, user.name);
+                    ls('token', token);
+                }
+                return { user, token };
+            } catch (error) {
+                throw error;
+            }
+        },
+        foregetPassword: async (_, args) => {
+            try {
+                const { email } = args;
+                if (!email) {
+                    throw new Error('email is required');
+                }
+                const user = await User.findOne({ where: { email } });
+                if (!user) {
+                    throw new Error('User not exist');
+                }
+                else {
+                    await forgetPassword(user);
+                    user.emailToken = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                }
+            } catch (error) {
+                throw error;
+            }
+        },
     }
 }
 

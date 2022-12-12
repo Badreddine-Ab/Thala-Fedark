@@ -28,4 +28,24 @@ const sendEmail = (user) => {
     }
 };
 
-module.exports = { sendEmail }
+// for forget password
+
+const forgetPassword = (user) => {
+    const mailOptions = {
+        from: ' "Verify your email" chaimaaet2001@gmail.com',
+        to: user.email,
+        subject: 'Account Activation link',
+        html: `<h4> please click on given link to reset your password </h4>
+            <a href="http://localhost:9090/api/auth/forgetPassword/${user.emailToken}" >click to reset password</a>`
+    };
+    try {
+        transporter.sendMail(mailOptions)
+        console.log('the link to reset password is sent to your gmail account')
+
+    } catch (error) {
+        return error.err || 'error'
+    }
+};
+
+
+module.exports = { sendEmail, forgetPassword }
