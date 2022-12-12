@@ -12,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Accueil />} />
+          <Route path="/:id" element={<Accueil />} />
         </Routes>
       </BrowserRouter>
     </h1>
