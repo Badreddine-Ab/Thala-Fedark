@@ -16,7 +16,7 @@ const sendEmail = (user) => {
         subject: 'Verify your email',
         html: `<h2> ${user.name}! thanks for registering on our site</h2>
                 <h4> please verify your mail to continue ... </h4>
-                <a href="http://localhost:8081/api/auth/verify_email/${user.emailToken}"> Verify your Email</a>`
+                <a href="http://localhost:9090/api/auth/verify_email/${user.emailToken}"> Verify your Email</a>`
     };
 
     try {
@@ -46,6 +46,5 @@ const forgetPassword = (user) => {
         return error.err || 'error'
     }
 };
-
 
 module.exports = { sendEmail, forgetPassword }

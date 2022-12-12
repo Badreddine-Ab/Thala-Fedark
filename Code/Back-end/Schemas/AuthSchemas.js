@@ -6,10 +6,10 @@ const crypto = require('crypto');
 const generateToken = require('../Utils/generateToken')
 const ls = require('local-storage');
 const jwt = require('jsonwebtoken');
+
+
+
 const { sendEmail, forgetPassword } = require('../Utils/sendEmail');
-
-
-
 
 const typeDefs = gql`
     type User{
@@ -30,7 +30,7 @@ const typeDefs = gql`
         signup(name : String!, email : String! , password : String!, role : String!) : User
         login(email : String!, password : String!) : AuthPayload
         foregetPassword(email : String!) : String
-
+        resetPassword(password : String! , token : String!) : String
     }
 `;
 
@@ -62,6 +62,7 @@ const resolvers = {
                     emailToken: crypto.randomBytes(64).toString('hex'),
                     isVerified: false,
                     roleId: roles.id,
+                    isReset: false
                 });
                 await sendEmail(user);
                 return user;
@@ -69,32 +70,6 @@ const resolvers = {
                 throw error;
             }
         },
-        // login: async (_, args) => {
-        //     try {
-        //         const { email, password } = args;
-        //         if (!email || !password) {
-        //             throw new Error('Please enter all fields');
-        //         }
-        //         const user = await User.findOne({ where: { email } });
-        //         if (!user) {
-        //             throw new Error('User not exist');
-        //         }
-        //         const isMatch = await bycrpt.compare(password, user.password);
-        //         if (!isMatch) {
-        //             throw new Error('Invalid password');
-        //         }
-        //         if (user && isMatch && !user.isVerified) {
-        //             throw new Error('Please verify your email');
-        //         }
-        //         if (user && isMatch && user.isVerified) {
-        //             var token = generateToken(user.id, user.email, user.name);
-        //             ls('token', token);
-        //         }
-        //         return { user, token };
-        //     } catch (error) {
-        //         throw error;
-        //     }
-        // },
         login: async (_, args) => {
             try {
                 const { email, password } = args;
@@ -139,6 +114,29 @@ const resolvers = {
                 throw error;
             }
         },
+        resetPassword: async (_, args) => {
+            try {
+                const { password, token } = args;
+                if (!password) {
+                    throw new Error('Password is required');
+                }
+                else {
+                    const user = await User.findOne({ where: { emailToken: token } });
+                    if (user && user.isReset === true) {
+                        const salt = await bycrpt.genSalt(10)
+                        const haschedPassword = await bycrpt.hash(password, salt)
+                        user.password = haschedPassword;
+                        console.log("password is reset")
+                        await user.save();
+                    }
+                    else {
+                        console.log("password is not reset")
+                    }
+                }
+            } catch (error) {
+                throw error;
+            }
+        }
     }
 }
 

@@ -16,5 +16,20 @@ const verify_email = async (req, res) => {
         console.log(error)
     }
 }
-
-module.exports = { verify_email }
+const verify_email_rest = async (req, res) => {
+    try {
+        let token = req.params.token
+        const user_ = await user.findOne({ where: { emailToken: token } })
+        if (user_) {
+            user_.isReset = true
+            await user_.save()
+            console.log("password is verified")
+        }
+        else {
+            console.log("password is not verified")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+module.exports = { verify_email, verify_email_rest }
