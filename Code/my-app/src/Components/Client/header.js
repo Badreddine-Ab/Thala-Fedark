@@ -1,6 +1,5 @@
-// import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { FIND_ALL_CATGORIE } from "../../Api/Query/Query";
 import {Get_PRODUITS} from "../../Api/Query/Query"
 
 export default function Header() {
@@ -10,7 +9,6 @@ export default function Header() {
   //     navigate("/login");
   //   }
 
-  // let { error, data, loading } = useQuery(FIND_ALL_CATGORIE);
   const {error,data,loading } = useQuery(Get_PRODUITS);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
@@ -37,14 +35,17 @@ export default function Header() {
                  
                   {data.produits.map((produit, i) => {
             return (
-               <a key={i}
-                    href={produit.id}
+               
+               <Link to ={`/${produit.id}`}>
+ <p key={i}  
                     className="flex items-center px-6 py-3 hover:bg-gray-100 transition"
                   >
                     <span className="ml-6 text-gray-600 text-sm">{produit.name}</span>
 
-                  </a> 
+                  </p> 
                    
+               </Link>
+                 
   
                     
              

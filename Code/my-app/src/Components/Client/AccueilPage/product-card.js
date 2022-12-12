@@ -9,7 +9,7 @@ export default function Product() {
     <>
       <div className="container pb-16">
         <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">
-          New Arrivals
+        Article
         </h2>
         <div className="grid grid-cols-4 gap-6">
           {data.produits.map((produit, i) => {

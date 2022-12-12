@@ -19,12 +19,12 @@ const [name,setName]=useState("")
   return (
     <div>
       <header className="py-4 shadow-sm bg-white">
-        {/* <div className="container flex items-center justify-between">
+        <div className="container flex items-center justify-between">
           <span className="text-primary">THALA</span>
           <div className="w-full max-w-xl relative flex">
             <span className="absolute left-4 top-3 text-lg text-gray-400">
               <i className="fa-solid fa-magnifying-glass"></i>
-            </span> */}
+            </span>
 
             <input
               type="text"
@@ -40,9 +40,9 @@ const [name,setName]=useState("")
             >
               Search
             </button>
-          {/* </div> */}
+         </div> 
 
-          {/* <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4">
             <a
               href="#"
               className="text-center text-gray-700 hover:text-primary transition relative"
@@ -51,9 +51,9 @@ const [name,setName]=useState("")
                 <i className="fa-regular fa-heart"></i>
               </div>
               <div className="text-xs leading-3">Wishlist</div>
-              <div className="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                8
-              </div>
+              {/* <div className="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                
+              </div> */}
             </a>
             <a
               href="#"
@@ -63,9 +63,9 @@ const [name,setName]=useState("")
                 <i className="fa-solid fa-bag-shopping"></i>
               </div>
               <div className="text-xs leading-3">Cart</div>
-              <div className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                2
-              </div>
+              {/* <div className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                
+              </div> */}
             </a>
             <a
               href="#"
@@ -76,8 +76,8 @@ const [name,setName]=useState("")
               </div>
               <div className="text-xs leading-3">Account</div>
             </a>
-          </div> */}
-        {/* </div> */}
+          </div> 
+        </div>
       </header>
     </div>
   );
