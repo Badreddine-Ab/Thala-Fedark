@@ -1,33 +1,37 @@
 const Sequelize = require('sequelize');
-const {db} = require('../Config/DbConfig');
+const { db } = require('../Config/DbConfig');
 const role = require('./roleUserModel')
 
 const user = db.define('users', {
-    name : {
-        type: Sequelize.STRING 
-    },
-    email : {
+    name: {
         type: Sequelize.STRING
     },
-    password : {
-        type : Sequelize.STRING
-    },
-    image : {
+    email: {
         type: Sequelize.STRING
     },
-    emailToken : {
+    password: {
         type: Sequelize.STRING
     },
-    isVerified : {
+    isReset: {
         type: Sequelize.BOOLEAN,
-        default : false
+        default: false
     },
-    codePromo : {
-        type : Sequelize.STRING
+    image: {
+        type: Sequelize.STRING
     },
-    promoUtilisé : {
+    emailToken: {
+        type: Sequelize.STRING
+    },
+    isVerified: {
         type: Sequelize.BOOLEAN,
-        default : false
+        default: false
+    },
+    codePromo: {
+        type: Sequelize.STRING
+    },
+    promoUtilisé: {
+        type: Sequelize.BOOLEAN,
+        default: false
     }
 })
 
