@@ -1,58 +1,27 @@
-import { useQuery, gql } from "@apollo/client";
-import { useEffect, useState } from "react";
-
-const Get_PRODUITS = gql`
-  {
-    launchesPast(limit: 3) {
-      mission_name
-      ships {
-        name
-        home_port
-        image
-      }
-    }
-  }
-`;
+import { useQuery} from "@apollo/client";
+import {Get_PRODUITS} from "../../../Api/Query/Query"
 
 export default function Product() {
-  const [products, setProducts] = useState([]);
-  // const [error, setError] = useState([]);
-  // const [loading, setLoading] = useState(false);
-
   let { error, data, loading } = useQuery(Get_PRODUITS);
-
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
-
-  // console.log(data);
-  data = data.launchesPast;
-
-  console.log(data);
-
   return (
     <>
       <div className="container pb-16">
         <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">
-          New Arrivals
+        Article
         </h2>
         <div className="grid grid-cols-4 gap-6">
-          {data.map((launch, i) => {
+          {data.produits.map((produit, i) => {
             return (
               <div key={i}>
                 <div className="bg-white shadow rounded overflow-hidden group">
                   <div className="relative">
-                    {launch.mission_name}
-                    {launch.ships.map((shi) => (
-                      <>
-                        
-                        <img
-                          src={shi.image}
+                    <img
+                          src={produit.images}
                           alt="product 1"
                           className="w-full"
                         />
-                      </>
-                    ))}
-
                     <div
                       className="absolute inset-0 bg-black bg-opacity-40 flex items-center
         justify-center gap-2 opacity-0 group-hover:opacity-100 transition"
@@ -76,12 +45,12 @@ export default function Product() {
                   <div className="pt-4 pb-3 px-4">
                     <a href="#">
                       <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                        Guyer Chair
+                       {produit.name}
                       </h4>
                     </a>
                     <div className="flex items-baseline mb-1 space-x-2">
                       <p className="text-xl text-primary font-semibold">
-                        $45.00
+                      {produit.name}DH
                       </p>
                       <p className="text-sm text-gray-400 line-through">
                         $55.90
