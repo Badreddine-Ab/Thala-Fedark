@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 8000
 
 #starting the server
-CMD ["npm","start","dev","server.js"]
+CMD ["npm run","start:dev"]
