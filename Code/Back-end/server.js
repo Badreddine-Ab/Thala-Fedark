@@ -5,7 +5,13 @@ const models = require('./Models/index')
 const apiError = require('./Utils/ErrorUtils')
 const globalError = require('./Middlewares/errorMiddleware')
 const { ApolloServer } = require('apollo-server-express')
-const { resolvers, typeDefs } = require('./Schemas/CategorieSchema')
+const { resolvers } = require('./Schemas/CategorieSchema')
+const { resolverCommand  } = require('./Schemas/CommandShema')
+const { typeDefs  } = require('./Routes/Root')
+
+
+
+console.log(process.env.host)
 
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
@@ -33,7 +39,7 @@ app.get('/', (req, res) => {
 // app.use(errRoute)
 
 const StartAppoloServer = async () => {
-    const server = new ApolloServer({ typeDefs, resolvers })
+    const server = new ApolloServer({ typeDefs, resolverCommand,resolvers})
     await server.start()
     server.applyMiddleware({ app, path: "/graphql" })
     console.log(`apollo server is running at http://localhost:${port}${server.graphqlPath}`)
@@ -56,13 +62,13 @@ const server = app.listen(port, (err) => {
 
 
 // Handle errors outside express
-process.on("unhandledRejection", (err) => {
-    console.error(`UnhandledRejection Errors : ${err.name} | ${err.message}`);
-    server.close(() => {
-        console.error('Shutting down....')
-        process.exit(1)
-    })
-})
+// process.on("unhandledRejection", (err) => {
+//     console.error(`UnhandledRejection Errors : ${err.name} | ${err.message}`);
+//     server.close(() => {
+//         console.error('Shutting down....')
+//         process.exit(1)
+//     })
+// })
 
 
 

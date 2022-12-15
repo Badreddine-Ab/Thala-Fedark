@@ -20,7 +20,7 @@ export default function Header() {
         <div>
           <nav className="bg-gray-800">
             <div className="container flex">
-              <div className="px-8 py-4 bg-primary flex items-center cursor-pointer relative group">
+              <div className="px-8 py-4 bg-primary flex items-center cursor-pointer relative group z-10">
                 <span className="text-white">
                   <i className="fa-solid fa-bars"></i>
                 </span>

@@ -1,5 +1,5 @@
-import { useQuery} from "@apollo/client";
-import {Get_PRODUITS} from "../../../Api/Query/Query"
+import { useQuery } from "@apollo/client";
+import { Get_PRODUITS } from "../../../Api/Query/Query";
 
 export default function Product() {
   let { error, data, loading } = useQuery(Get_PRODUITS);
@@ -9,7 +9,7 @@ export default function Product() {
     <>
       <div className="container pb-16">
         <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">
-        Article
+          Article
         </h2>
         <div className="grid grid-cols-4 gap-6">
           {data.produits.map((produit, i) => {
@@ -18,13 +18,12 @@ export default function Product() {
                 <div className="bg-white shadow rounded overflow-hidden group">
                   <div className="relative">
                     <img
-                          src={produit.images}
-                          alt="product 1"
-                          className="w-full"
-                        />
+                      src={produit.images}
+                      alt="product 1"
+                      className="w-full"
+                    />
                     <div
-                      className="absolute inset-0 bg-black bg-opacity-40 flex items-center
-        justify-center gap-2 opacity-0 group-hover:opacity-100 transition"
+                      className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition"
                     >
                       <a
                         href="#"
@@ -45,12 +44,12 @@ export default function Product() {
                   <div className="pt-4 pb-3 px-4">
                     <a href="#">
                       <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                       {produit.name}
+                        {produit.name}
                       </h4>
                     </a>
                     <div className="flex items-baseline mb-1 space-x-2">
                       <p className="text-xl text-primary font-semibold">
-                      {produit.name}DH
+                        {produit.name}DH
                       </p>
                       <p className="text-sm text-gray-400 line-through">
                         $55.90
