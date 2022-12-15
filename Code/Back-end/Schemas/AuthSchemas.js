@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const generateToken = require('../Utils/generateToken')
 const ls = require('local-storage');
 const jwt = require('jsonwebtoken');
+const generateCodePromo = require('../Utils/generateCodePromo');
 
 
 
@@ -62,6 +63,8 @@ const resolvers = {
                     emailToken: crypto.randomBytes(64).toString('hex'),
                     isVerified: false,
                     roleId: roles.id,
+                    codePromo: generateCodePromo(),
+                    promoUtilisé: false,
                     isReset: false
                 });
                 await sendEmail(user);
