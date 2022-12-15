@@ -5,7 +5,7 @@ const models = require('./Models/index')
 const apiError = require('./Utils/ErrorUtils')
 const globalError = require('./Middlewares/errorMiddleware')
 const { ApolloServer } = require('apollo-server-express')
-const { resolvers, typeDefs } = require('./Schemas/AuthSchemas')
+const { resolvers, typeDefs } = require('./Schemas/CategorieSchema')
 
 const cors = require('cors');
 const cookieParser = require("cookie-parser");

@@ -1,18 +1,14 @@
 import React from "react";
-import Layout from "../../Components/Client/layout";
-import Toppage from '../../Components/Client/AccueilPage/Toppage'
-import Product from "../../Components/Client/AccueilPage/product-card";
-import Categories from "../../Components/Client/AccueilPage/categorie";
-import Recomende from "../../Components/Client/AccueilPage/Recomended";
-import Offre from "../../Components/Client/AccueilPage/offre";
+import {Layout,Toppage,Product,Categories,Recomende, Offre,Search}from "../../Router/AccueilRouter"
 
 function Accueil() {
   return (
     <>
+    <Search />
       <Layout>
         <Toppage />
          <Categories />
-         <Product />
+         <Product /> 
          <Offre/>
          <Recomende />
       </Layout>

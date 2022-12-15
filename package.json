@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "apollo-server-express": "^3.11.1",
-    "crypto": "^1.0.1"
+    "apollo-link-ws": "^1.0.20",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.4"
   }
 }
