@@ -10,13 +10,13 @@ const resolverCommand = {
     },
 
     Mutation: {
-        AddCommand: async (_,args) => {
+        AddCommand: async (_ , args) => {
             try{
-                const{prixTotal,quantite,etat,idUser}=args
+                let {prixTotal,quantite,idUser}= args
                 if(!prixTotal || !quantite || !etat){
                     throw new Error('Please remplire tous les champs')
                 }
-                return await Commande.create({prixTotal:prixTotal,quantite:quantite,etat:etat,idUser:idUser})
+                return await Commande.create({prixTotal:prixTotal,quantite:quantite,etat:"en attend",idUser:idUser})
             }catch(error){
                 throw error
             }

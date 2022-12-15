@@ -1,6 +1,6 @@
 
-const Commande = require('../Models/commandeModel');
-const Categorie = require('../Models/categorieModel')
+// const Commande = require('../Models/commandeModel');
+// const Categorie = require('../Models/categorieModel')
 const { gql } = require('apollo-server-express');
 
 
@@ -18,7 +18,7 @@ const typeDefs = gql`
  }
 
  type Mutation{
-    AddCommand(id:ID):Commande
+    AddCommand(prixTotal:Float!,quantite:Int!,idUser:Int!) : Commande
     updateCommand(id:ID,etat:Boolean):Boolean
  }
  type Categorie{    
