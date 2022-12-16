@@ -1,26 +1,8 @@
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const Categorie = require('../Models/categorieModel')
 const Product = require('../Models/productModel');
 const { response } = require('../server');
 
-const typeDefs = gql`
-
-    type Categorie{    
-        id : ID,
-        name : String,
-    }
-
-    type Query{
-        hello : String
-        categories: [Categorie]
-    }
-
-    type Mutation{
-        addCategorie(name:String!) : Categorie
-        deleteCategorie(id:ID) : Boolean
-        updateCategorie(id:ID!,name:String):Boolean
-    }
-`;
 
 const resolvers = {
     Query: {
@@ -83,4 +65,4 @@ const resolvers = {
     }
 }
 
-module.exports = { typeDefs, resolvers }
+module.exports = {resolvers }

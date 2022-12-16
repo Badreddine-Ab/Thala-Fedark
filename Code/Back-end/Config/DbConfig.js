@@ -1,9 +1,9 @@
 const { Sequelize } = require('sequelize');
 
-const db = new Sequelize(process.env.DATABASE, process.env.DB_USER, process.env.password, {
-  host: process.env.host,
-  dialect: 'postgres'
-});
+const db =new Sequelize(process.env.DATABASE, process.env.DB_USER, process.env.password, {
+    host: process.env.host,
+    dialect: 'postgres'
+  });
 
 
 const connectDb = async ()=>{

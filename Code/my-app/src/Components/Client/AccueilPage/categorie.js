@@ -1,7 +1,7 @@
 export default function Categories() {
     return (
         <>
-      <div className="container py-16">
+      <div className="container py-16 ">
         <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">shop by category</h2>
         <div className="grid grid-cols-3 gap-3">
             <div className="relative rounded-sm overflow-hidden group">
