@@ -33,7 +33,10 @@ const resolvers = {
     updateCommand:async(_,args)=>{
         try{
           const {id,etat}=  args
-          if(await Commande.update({id: id},{ etat:etat})) return true
+        if(await Commande.update({etat: etat,}, {where: { id: id },}))  return true
+          else{
+            return false
+          }
 
         }catch(e){
             throw e
