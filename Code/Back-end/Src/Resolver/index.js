@@ -8,4 +8,5 @@ const customScalarResolver = {
   
 const authResolver = require('./authResolver');
 const categorieResolver = require('./categorieResolver.js')
-module.exports = [customScalarResolver, authResolver, categorieResolver]
+const commandResolver = require('./commandResolver')
+module.exports = [customScalarResolver, authResolver, categorieResolver,commandResolver]
