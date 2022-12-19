@@ -1,7 +1,6 @@
 const { ApolloServer } = require('apollo-server-express');
 const Categorie = require('../Models/categorieModel')
 const Product = require('../Models/productModel');
-const { response } = require('../server');
 
 
 const resolvers = {
