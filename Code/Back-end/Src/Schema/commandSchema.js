@@ -6,7 +6,7 @@ module.exports = gql`
     prixTotal:Float,
     quantite:Int,
     etat:String,
-    idUser:Int
+    userId:ID
  }
 
  type Query {
@@ -14,7 +14,8 @@ module.exports = gql`
  }
 
  type Mutation{
-    AddCommand(prixTotal:Float!,quantite:Int!,idUser:Int!): Commande
-    updateCommand(id:ID,etat:Boolean): Boolean
+    AddCommand(prixTotal:Float!,quantite:Int!,idUser:ID!): Commande
+    updateCommand(id:ID!,etat:String!): Boolean
+    deleteCommande(id:ID!): Boolean
  }
  `
