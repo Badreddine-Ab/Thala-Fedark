@@ -18,23 +18,34 @@ const typeDefs = gql`
  }
 
  type Mutation{
-    AddCommand(prixTotal:Float!,quantite:Int!,idUser:Int!) : Commande
-    updateCommand(id:ID,etat:Boolean):Boolean
+    AddCommand(prixTotal:Float!,quantite:Int!,idUser:Int!): Commande
+    updateCommand(id:ID,etat:Boolean): Boolean
  }
- type Categorie{    
-        id : ID,
-        name : String,
+ 
+ type Product{    
+        id: ID,
+        name: String,
+        description: String,
+        prix: Float,
+        stock: Int,
+        ventes: Int,
+        ventes_promo: Int,
+        images : [Image]
+        Categorie : Categorie 
+    }
+
+    type Image{
+        image : String
     }
 
     type Query{
-        hello : String
-        categories: [Categorie]
+        products: [Product]
     }
 
     type Mutation{
-        addCategorie(name:String!) : Categorie
-        deleteCategorie(id:ID) : Boolean
-        updateCategorie(id:ID!,name:String):Boolean
+        addProduct(name:String!,description:String,prix:Float,stock:Int) : Product
+        deleteProduct(id:ID) : Boolean
+        updateProduct(id:ID!,name:String):Boolean
     }
 `
 module.exports={typeDefs}

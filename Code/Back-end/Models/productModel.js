@@ -20,10 +20,7 @@ const product = db.define('product', {
     },
     ventes_promo : {
         type : Sequelize.INTEGER
-    },
-    images: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
-   }
+    }
 })
 
 promotion.hasMany(product)
