@@ -12,38 +12,40 @@ const resolvers = {
   Mutation: {
     AddCommand: async (_, args) => {
       try {
-        const { prixTotal, quantite,id } = args;
+        const { prixTotal, quantite, id } = args;
 
-        if (!prixTotal || !quantite ||id ) {
+        if (!prixTotal || !quantite || id) {
           throw new Error("Please remplire tous les champs");
         }
         return await Commande.create({
           prixTotal: prixTotal,
           quantite: quantite,
           etat: "en attend",
-          userId:id
+          userId: id,
         });
-        
       } catch (error) {
         throw error;
       }
     },
 
-
-    updateCommand:async(_,args)=>{
-        try{
-          const {id,etat}=  args
-        if(await Commande.update({etat: etat,}, {where: { id: id },}))  return true
-          else{
-            return false
-          }
-
-        }catch(e){
-            throw e
-        }
-    //    await updateCommand(id: ID, etat: Boolean): Boolean
-
-    }
+    updateCommand: async (_, args) => {
+      try {
+        const { id, etat } = args;
+        if (await Commande.update({ etat: etat }, { where: { id: id } }))
+          return true;
+        else return false;
+      } catch (e) {
+        throw e;
+      }
+    },
+    deleteCommande: async (_, args) => {
+      try {
+        if (await Commande.destroy({ where: args })) return true;
+        else return false;
+      } catch (e) {
+        throw e;
+      }
+    },
   },
 };
 

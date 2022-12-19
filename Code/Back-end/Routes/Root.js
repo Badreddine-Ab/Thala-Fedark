@@ -18,6 +18,8 @@ const typeDefs = gql`
   type Mutation {
     AddCommand(prixTotal: Float!, quantite: Int!,idUser:Int!): Commande
     updateCommand(id: ID!, etat: String): Boolean
+    deleteCommande(id: ID): Boolean
+
   }
   type Categorie {
     id: ID
