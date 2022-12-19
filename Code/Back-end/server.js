@@ -5,8 +5,8 @@ const models = require('./Models/index')
 const apiError = require('./Utils/ErrorUtils')
 const globalError = require('./Middlewares/errorMiddleware')
 const { ApolloServer } = require('apollo-server-express')
-const { resolvers } = require('./Schemas/CategorieSchema')
-const { resolverCommand  } = require('./Schemas/CommandShema')
+// const { resolvers } = require('./Schemas/CategorieSchema')
+const { resolvers  } = require('./Schemas/CommandShema')
 const { typeDefs  } = require('./Routes/Root')
 
 
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 // app.use(errRoute)
 
 const StartAppoloServer = async () => {
-    const server = new ApolloServer({ typeDefs, resolverCommand,resolvers})
+    const server = new ApolloServer({ typeDefs,resolvers})
     await server.start()
     server.applyMiddleware({ app, path: "/graphql" })
     console.log(`apollo server is running at http://localhost:${port}${server.graphqlPath}`)

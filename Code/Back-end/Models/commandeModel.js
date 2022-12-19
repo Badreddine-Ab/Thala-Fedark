@@ -6,7 +6,7 @@ const commande = db.define('commande', {
     prixTotal : {
         type: Sequelize.FLOAT 
     },
-    quantité : {
+    quantite : {
         type: Sequelize.INTEGER
     },
     etat : {
