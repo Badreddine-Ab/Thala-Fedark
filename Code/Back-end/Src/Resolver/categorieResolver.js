@@ -4,6 +4,7 @@ const Product = require('../../Models/productModel');
 
 
 module.exports= {
+
     Query: {
         categories: async ()=> {
             const categories = await Categorie.findAll({})
