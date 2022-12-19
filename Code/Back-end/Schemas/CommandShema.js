@@ -14,15 +14,10 @@ const resolvers = {
       try {
         const { prixTotal, quantite, id } = args;
 
-        if (!prixTotal || !quantite || id) {
+        if (!prixTotal || !quantite || !id) {
           throw new Error("Please remplire tous les champs");
         }
-        return await Commande.create({
-          prixTotal: prixTotal,
-          quantite: quantite,
-          etat: "en attend",
-          userId: id,
-        });
+        return await Commande.create({prixTotal: prixTotal,quantite: quantite,etat: "en attend",userId: id});
       } catch (error) {
         throw error;
       }
