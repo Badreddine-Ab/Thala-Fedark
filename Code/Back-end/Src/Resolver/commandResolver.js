@@ -1,8 +1,8 @@
 const {ApolloServer}=require('apollo-server-express');
-const Commande = require('../Models/commandeModel');
+const Commande = require('../../Models/commandeModel');
 
 
-const resolverCommand = {
+module.exports = {
     Query: {
         Querycommande: async ()=> {  
             return await Commande.findAll({})

@@ -12,7 +12,6 @@ const schema = require('./src/schema/index')
 const resolvers = require('./Src/Resolver/index')
 
 
-
 console.log(process.env.host)
 
 const cors = require('cors');

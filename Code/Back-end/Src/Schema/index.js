@@ -1,6 +1,7 @@
 const {gql} = require('apollo-server-express');
 const authSchema = require('./authSchema')
 const categorieSchema = require('./categorieSchema')
+const productSchema = require('./produitSchema')
 
 const baseSchema =  gql`
 scalar Date

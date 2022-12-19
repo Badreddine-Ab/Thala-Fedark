@@ -1,26 +1,7 @@
 
 // const Commande = require('../Models/commandeModel');
 // const Categorie = require('../Models/categorieModel')
-const { gql } = require('apollo-server-express');
 
-
-const typeDefs = gql`
- type Commande {
-    id:ID,
-    prixTotal:Float,
-    quantite:Int,
-    etat:String,
-    idUser:Int
- }
-
- type Query {
-    Querycommande:[Commande]
- }
-
- type Mutation{
-    AddCommand(prixTotal:Float!,quantite:Int!,idUser:Int!): Commande
-    updateCommand(id:ID,etat:Boolean): Boolean
- }
  
  type Product{    
         id: ID,
@@ -48,4 +29,3 @@ const typeDefs = gql`
         updateProduct(id:ID!,name:String):Boolean
     }
 `
-module.exports={typeDefs}
