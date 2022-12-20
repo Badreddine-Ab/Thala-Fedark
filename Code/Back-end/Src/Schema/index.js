@@ -1,6 +1,7 @@
 const {gql} = require('apollo-server-express');
 const authSchema = require('./authSchema')
 const categorieSchema = require('./categorieSchema')
+const CommandShema = require('./commandSchema')
 
 const baseSchema =  gql`
 scalar Date
@@ -15,4 +16,4 @@ type Subscription {
 }
 `;
 
-module.exports =  [baseSchema, authSchema,categorieSchema]
+module.exports =  [baseSchema, authSchema,categorieSchema,CommandShema]
