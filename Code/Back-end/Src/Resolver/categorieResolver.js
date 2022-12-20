@@ -76,11 +76,11 @@ module.exports= {
             }
             
           },
-          addProduct: (parent, { name, description, stock, images, categoryId }) => {
-            return Product.create({ name, description, stock, images, categoryId });
+          addProduct: (parent, { name, description, stock, images, categorieId }) => {
+            return Product.create({ name, description, stock, images, categorieId });
           },
-          updateProduct: (parent, { id, name, description, stock, images, categoryId }) => {
-            return Product.update({ name, description, stock, images, categoryId }, { where: { id } });
+          updateProduct: (parent, { id, name, description, stock, images, categorieId }) => {
+            return Product.update({ name, description, stock, images, categorieId }, { where: { id } });
           },
           deleteProduct: (parent, { id }) => {
             return Product.destroy({ where: { id } });
