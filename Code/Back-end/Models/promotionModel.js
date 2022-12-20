@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const {db} = require('../Config/DbConfig');
 
+
 const promotion = db.define('promotion', {
     valeur : {
         type: Sequelize.INTEGER 
@@ -12,4 +13,6 @@ const promotion = db.define('promotion', {
         type : Sequelize.STRING
     }
 })
+
+
 module.exports = promotion
