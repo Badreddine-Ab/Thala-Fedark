@@ -5,24 +5,28 @@ const Product = require('../../Models/productModel');
 
 module.exports= {
     Query: {
-        categories: async() =>{
-             const categorie = await Categorie.findAll({include:Product,row:true,nest:true})
-             return categorie
-            },
+        categories: () => {
+            return Categorie.findAll({
+              include: [
+                {
+                  model: Product,
+                },
+              ],
+            });
+          },
         categorie: async() =>{
             const categorie = await Categorie.findByPk(id)
             return categorie
         } ,
-        products: (_, { categorieId }) => {
-            // Use the Sequelize `findAll` method to retrieve all products that belong to the specified category
+        products: () => {
             return Product.findAll({
-              where: { categorieId },
-              include: [{
-                model: Categorie,
-                as: 'categorie'
-              }]
+              include: [
+                {
+                  model: Categorie,
+                },
+              ],
             });
-          } ,
+          },
         product: (_, { id },) => findByPk(id), 
     },
     Mutation: {
