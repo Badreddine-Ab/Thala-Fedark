@@ -6,10 +6,11 @@ module.exports = gql`
     prixTotal:Float,
     quantite:Int,
     etat:String,
-    userId:ID,
-    StartDate:String
-    EndDate:String
- }
+    StartDate:String,
+    EndDate:String,
+    user:User
+} 
+
 
  type Query {
     Querycommande:[Commande]

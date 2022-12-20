@@ -8,7 +8,7 @@ const user = require('../../Models/userModel');
 module.exports = {
     Query: {
         Querycommande: async ()=> {  
-            return await Commande.findAll({})
+            return await Commande.findAll({order: [['id', 'DESC']],include:user,  raw: true, nest: true})
         },
         StatistiqueAchats: async (_,args)=> { 
           let {StartDate,EndDate}=args 
