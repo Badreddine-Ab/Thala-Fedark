@@ -14,7 +14,7 @@ module.exports = gql`
 
  type Query {
     Querycommande:[Commande]
-    StatistiqueAchats(StartDate:String,EndDate:String):Int
+    StatistiqueAchats(StartDate:String!,EndDate:String!):Int
  }
 
  type Mutation{
