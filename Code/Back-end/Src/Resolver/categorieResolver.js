@@ -13,11 +13,17 @@ module.exports= {
             const categorie = await Categorie.findByPk(id)
             return categorie
         } ,
-        products: async() =>{
-            const product = await Product.findAll({})
-            return product
-        } ,
-        // product: (_, { id }, { db }) => db.Product.findByPk(id), 
+        products: (_, { categorieId }) => {
+            // Use the Sequelize `findAll` method to retrieve all products that belong to the specified category
+            return Product.findAll({
+              where: { categorieId },
+              include: [{
+                model: Categorie,
+                as: 'categorie'
+              }]
+            });
+          } ,
+        product: (_, { id },) => findByPk(id), 
     },
     Mutation: {
         addCategorie: async (_, args) => {
@@ -76,14 +82,23 @@ module.exports= {
             }
             
           },
-          addProduct: (parent, { name, description, stock, images, categorieId }) => {
-            return Product.create({ name, description, stock, images, categorieId });
-          },
+        //   addProduct: (parent, { name, description, stock, images, categorieId }) => {
+        //     return Product.create({ name, description, stock, images, categorieId });
+        //   },
           updateProduct: (parent, { id, name, description, stock, images, categorieId }) => {
             return Product.update({ name, description, stock, images, categorieId }, { where: { id } });
           },
           deleteProduct: (parent, { id }) => {
             return Product.destroy({ where: { id } });
+          },
+          addProduct: (_, {  name, description, stock, images, categorieId }) => {
+            // Use the Sequelize `create` method to create a new product and associate it with the specified category
+            return Product.create( {name, description, stock, images, categorieId}, {
+              include: [{
+                model: Categorie,
+                as: 'categorie'
+              }]
+            });
           }
     
     }
