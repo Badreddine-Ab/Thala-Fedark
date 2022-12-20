@@ -27,6 +27,7 @@ module.exports= {
               ],
             });
           },
+    
         product: (_, { id },) => findByPk(id), 
     },
     Mutation: {
