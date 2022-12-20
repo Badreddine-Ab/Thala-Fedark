@@ -8,7 +8,9 @@ const categorie = db.define('categorie', {
     },
 })
 
+
+Product.belongsTo(categorie, { foreignKey: 'categorieId' });
 categorie.hasMany(Product)
-Product.belongsTo(categorie)
+
 
 module.exports = categorie

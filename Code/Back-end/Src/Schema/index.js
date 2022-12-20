@@ -1,7 +1,6 @@
 const {gql} = require('apollo-server-express');
 const authSchema = require('./authSchema')
 const categorieSchema = require('./categorieSchema')
-const productSchema = require('./produitSchema')
 const CommandShema = require('./commandSchema')
 
 const baseSchema =  gql`
