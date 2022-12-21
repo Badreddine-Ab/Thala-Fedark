@@ -175,9 +175,9 @@ module.exports= {
           // Return the created product
           return product;
         },
-        async updateProduct(_, { id, input }, { models }) {
+        async updateProduct(_, { id, input }, ) {
           // Find the product with the given ID
-          const product = await models.Product.findByPk(id);
+          const product = await Product.findByPk(id);
       
           // If the product does not exist, return an error
           if (!product) {
@@ -190,9 +190,9 @@ module.exports= {
           // Return the updated product
           return product;
         },
-        async deleteProduct(_, { id }, { models }) {
+        async deleteProduct(_, { id }, ) {
           // Find the product with the given ID
-          const product = await models.Product.findByPk(id);
+          const product = await Product.findByPk(id);
       
           // If the product does not exist, return an error
           if (!product) {
