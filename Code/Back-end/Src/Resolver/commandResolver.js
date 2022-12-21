@@ -1,13 +1,23 @@
 const {ApolloServer}=require('apollo-server-express');
+const { where ,Op } = require('sequelize');
 const Commande = require('../../Models/commandeModel');
 const user = require('../../Models/userModel');
+
 
 
 module.exports = {
     Query: {
         Querycommande: async ()=> {  
-            return await Commande.findAll({})
+            return await Commande.findAll({order: [['id', 'DESC']],include:user,  raw: true, nest: true})
+        },
+        StatistiqueAchats: async (_,args)=> { 
+          let {StartDate,EndDate}=args 
+            return await Commande.count({where:{ createdAt: {
+                [Op.between]: [StartDate, EndDate],
+               }}})
         } 
+
+
     },
 
     Mutation: {

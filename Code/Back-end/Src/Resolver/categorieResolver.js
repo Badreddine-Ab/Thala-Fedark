@@ -4,12 +4,20 @@ const Product = require('../../Models/productModel');
 
 
 module.exports= {
-
     Query: {
-        categories: async ()=> {
-            const categories = await Categorie.findAll({})
-            return categories
-        } 
+        categories: async() =>{
+             const categorie = await Categorie.findAll({include:Product,row:true,nest:true})
+             return categorie
+            },
+        categorie: async() =>{
+            const categorie = await Categorie.findByPk(id)
+            return categorie
+        } ,
+        products: async() =>{
+            const product = await Product.findAll({})
+            return product
+        } ,
+        // product: (_, { id }, { db }) => db.Product.findByPk(id), 
     },
     Mutation: {
         addCategorie: async (_, args) => {
@@ -59,7 +67,24 @@ module.exports= {
             } catch (error) {
                 throw error
             }
-        }
-
+        },
+        updateCategorie: (parent, { id, name }, ) => {
+            try {
+                return Categorie.update({ name }, { where: { id } });
+            } catch (error) {
+                throw error
+            }
+            
+          },
+          addProduct: (parent, { name, description, stock, images, categorieId }) => {
+            return Product.create({ name, description, stock, images, categorieId });
+          },
+          updateProduct: (parent, { id, name, description, stock, images, categorieId }) => {
+            return Product.update({ name, description, stock, images, categorieId }, { where: { id } });
+          },
+          deleteProduct: (parent, { id }) => {
+            return Product.destroy({ where: { id } });
+          }
+    
     }
 }
