@@ -1,7 +1,10 @@
 
-const { gql } = require( 'apollo-server-express');
+const { gql } = require( 'apollo-server');
+
 
 module.exports= gql`
+scalar Upload
+
 type Categorie{    
     id: ID,
     name: String,
@@ -16,11 +19,20 @@ type Product {
         stock: Int!,
         ventes: Int,
         ventes_promo: Int
-        images: [String]!
+        images: [String]
         categorie: Categorie
 }
 
-
+input ProductInput {
+  name: String!
+  description: String!
+  prix: Float!
+  stock: Int!
+  ventes: Int!
+  ventes_promo: Int!
+  images: [Upload]
+  categorieId: ID!
+}
 
 extend type Query{
     categories: [Categorie]
@@ -33,13 +45,13 @@ extend type Mutation{
     addCategorie(name:String!) : Categorie
     deleteCategorie(id:ID) : Boolean
     updateCategorie(id: ID!, name: String!): Categorie
-    # createProduct(name: String!,description:String!, prix: Float!,stock:Int, categorieId: ID!): Product!
-    # updateProduct(id: ID!, name: String!,description:String!, prix: Float!,stock:Int,ventes:Int!,ventes_promo:Int! categorieId: ID!): Product!
-    # deleteProduct(id: ID!): Boolean
-    addProduct(name: String!, description: String!, stock: Int!, images: [String]!, categorieId: ID!): Product
-    updateProduct(id: ID!, name: String, description: String, stock: Int, images: [String], categorieId: ID): Product
-    deleteProduct(id: ID!): Product
+    # addProduct(name: String!, description: String!, stock: Int!, images: [Upload]!, categorieId: ID!): Product
+    # updateProduct(id: ID!, name: String, description: String, stock: Int, images: [Upload], categorieId: ID): Product
+    # deleteProduct(id: ID!): Product
+    # addProduct(input: ProductInput!): Product
+    createProduct(input: ProductInput!): Product!
+    updateProduct(id: ID!, input: ProductInput!): Product!
+    deleteProduct(id: ID!): Boolean!
     
-
 }
 `

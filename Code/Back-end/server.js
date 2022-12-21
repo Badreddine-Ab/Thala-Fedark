@@ -65,13 +65,13 @@ const server = app.listen(port, (err) => {
 
 
 // Handle errors outside express
-// process.on("unhandledRejection", (err) => {
-//     console.error(`UnhandledRejection Errors : ${err.name} | ${err.message}`);
-//     server.close(() => {
-//         console.error('Shutting down....')
-//         process.exit(1)
-//     })
-// })
+process.on("unhandledRejection", (err) => {
+    console.error(`UnhandledRejection Errors : ${err.name} | ${err.message}`);
+    server.close(() => {
+        console.error('Shutting down....')
+        process.exit(1)
+    })
+})
 
 
 

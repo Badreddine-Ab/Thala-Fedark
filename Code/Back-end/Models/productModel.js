@@ -16,14 +16,16 @@ const product = db.define('product', {
         type : Sequelize.INTEGER
     },
     ventes : {
-        type : Sequelize.INTEGER
+        type : Sequelize.INTEGER,
+        defaultValue: 0,
     },
     ventes_promo : {
-        type : Sequelize.INTEGER
+        type : Sequelize.INTEGER,
+        defaultValue: 0,
     },
     images: {
         type: Sequelize.ARRAY(Sequelize.STRING),
-        allowNull: false,
+        defaultValue: "no picture for this product",
     }
 })
 
