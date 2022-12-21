@@ -6,7 +6,8 @@ import GetCategory from './Pages/Client/GetProduitByCategory'
 import SearchbyName from './Pages/Client/GetProduitByName'
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
-import PageNotfound from './Pages/404.jsx'
+import PageNotfound from './Pages/404.jsx';
+import Dashboard from './Pages/Admin/dashboard'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register/>}/>
           <Route path="*" element={<PageNotfound/>}/>
+          <Route path="dashboard" element={<Dashboard/>}/>
         </Routes>
       </BrowserRouter>
     </h1>
