@@ -17,7 +17,7 @@ type Product {
         ventes: Int,
         ventes_promo: Int
         images: [String]!
-        categorie: Categorie!
+        categorie: Categorie
 }
 
 

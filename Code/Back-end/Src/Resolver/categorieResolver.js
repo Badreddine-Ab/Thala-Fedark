@@ -5,19 +5,30 @@ const Product = require('../../Models/productModel');
 
 module.exports= {
     Query: {
-        categories: async() =>{
-             const categorie = await Categorie.findAll({include:Product,row:true,nest:true})
-             return categorie
-            },
+        categories: () => {
+            return Categorie.findAll({
+              include: [
+                {
+                  model: Product,
+                },
+              ],
+            });
+          },
         categorie: async() =>{
             const categorie = await Categorie.findByPk(id)
             return categorie
         } ,
-        products: async() =>{
-            const product = await Product.findAll({})
-            return product
-        } ,
-        // product: (_, { id }, { db }) => db.Product.findByPk(id), 
+        products: () => {
+            return Product.findAll({
+              include: [
+                {
+                  model: Categorie,
+                },
+              ],
+            });
+          },
+    
+        product: (_, { id },) => findByPk(id), 
     },
     Mutation: {
         addCategorie: async (_, args) => {
@@ -76,14 +87,23 @@ module.exports= {
             }
             
           },
-          addProduct: (parent, { name, description, stock, images, categoryId }) => {
-            return Product.create({ name, description, stock, images, categoryId });
-          },
-          updateProduct: (parent, { id, name, description, stock, images, categoryId }) => {
-            return Product.update({ name, description, stock, images, categoryId }, { where: { id } });
+        //   addProduct: (parent, { name, description, stock, images, categorieId }) => {
+        //     return Product.create({ name, description, stock, images, categorieId });
+        //   },
+          updateProduct: (parent, { id, name, description, stock, images, categorieId }) => {
+            return Product.update({ name, description, stock, images, categorieId }, { where: { id } });
           },
           deleteProduct: (parent, { id }) => {
             return Product.destroy({ where: { id } });
+          },
+          addProduct: (_, {  name, description, stock, images, categorieId }) => {
+            // Use the Sequelize `create` method to create a new product and associate it with the specified category
+            return Product.create( {name, description, stock, images, categorieId}, {
+              include: [{
+                model: Categorie,
+                as: 'categorie'
+              }]
+            });
           }
     
     }
