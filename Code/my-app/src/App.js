@@ -7,6 +7,7 @@ import SearchbyName from './Pages/Client/GetProduitByName'
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
 import PageNotfound from './Pages/404.jsx'
+import Upload from './Components/Client/upload'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register/>}/>
           <Route path="*" element={<PageNotfound/>}/>
+          <Route path="/up" element={<Upload/>}/>
         </Routes>
       </BrowserRouter>
     </h1>
