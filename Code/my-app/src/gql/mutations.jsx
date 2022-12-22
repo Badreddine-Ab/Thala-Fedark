@@ -13,10 +13,14 @@ export const LOGIN_USER =gql`
         }
     }
 `   
-// export const FORGOT_PASSWORD = gql`
-//     mutation forgotPassword($email: String!) {
-//         forgotPassword(email: $email) {
-//             message
-//         }
-//     }
-// `;
+export const FORGOT_PASSWORD_MUTATION = gql`
+  mutation ForgotPasswordMutation($email: String!) {
+    forgotPassword(email: $email)
+  }
+`;
+
+const RESET_PASSWORD_MUTATION = gql`
+  mutation ResetPasswordMutation($resetToken: String!, $password: String!) {
+    resetPassword(resetToken: $resetToken, password: $password)
+  }
+`;
