@@ -1,7 +1,8 @@
 const Categorie = require('../../Models/categorieModel')
 const Product = require('../../Models/productModel');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+
+const  ApolloError = require("apollo-server");
 
 module.exports= {
     Query: {
@@ -136,6 +137,32 @@ module.exports= {
       
           // Return the ID of the deleted product
           return id;
+        },
+        updateProductStock: async (_, { input }, { db }) => {
+          try {
+            // Find the product with the specified ID
+            const product = await Product.findByPk(input.id);
+    
+            if (!product) {
+              // If the product was not found, throw an ApolloError
+              throw new ApolloError(`Product with ID ${input.id} not found`, "NOT_FOUND");
+            }
+    
+            // Update the product's stock
+            product.stock = input.stock;
+    
+            // Save the updated product to the database
+            await product.save();
+    
+            return {
+              product
+            };
+          } catch (error) {
+            // If there was an error, return a custom error message
+            return {
+              error: "An error occurred while updating the product's stock"
+            };
+          }
         }
       
     }
