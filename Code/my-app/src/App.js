@@ -8,11 +8,13 @@ import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
 import PageNotfound from './Pages/404.jsx'
 import Upload from './Components/Client/upload'
+import PageNotfound from './Pages/404.jsx';
+import Produit from './Pages/Admin/produit'
+import Command from './Pages/Admin/command'
 
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold ">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Accueil />} />
@@ -22,9 +24,11 @@ function App() {
           <Route path="/register" element={<Register/>}/>
           <Route path="*" element={<PageNotfound/>}/>
           <Route path="/up" element={<Upload/>}/>
+          <Route path="/produit" element={<Produit/>}/>
+          <Route path="/command" element={<Command/>}/>
         </Routes>
       </BrowserRouter>
-    </h1>
+  
        
   );
 }
