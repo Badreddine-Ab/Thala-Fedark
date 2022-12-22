@@ -45,10 +45,6 @@ extend type Mutation{
     addCategorie(name:String!) : Categorie
     deleteCategorie(id:ID) : Boolean
     updateCategorie(id: ID!, name: String!): Categorie
-    # addProduct(name: String!, description: String!, stock: Int!, images: [Upload]!, categorieId: ID!): Product
-    # updateProduct(id: ID!, name: String, description: String, stock: Int, images: [Upload], categorieId: ID): Product
-    # deleteProduct(id: ID!): Product
-    # addProduct(input: ProductInput!): Product
     createProduct(input: ProductInput!): Product!
     updateProduct(id: ID!, input: ProductInput!): Product!
     deleteProduct(id: ID!): Product!
