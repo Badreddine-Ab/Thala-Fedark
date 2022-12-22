@@ -28,6 +28,7 @@ module.exports= {
           product: (_, { id }) => Product.findByPk(id, {
             include: [{ model: Categorie }],
           }),
+
           
           searchProduct: (root, args, context) => {
             return Product.findOne({
