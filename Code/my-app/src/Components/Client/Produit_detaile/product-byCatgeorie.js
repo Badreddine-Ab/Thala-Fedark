@@ -1,18 +1,19 @@
-import { useQuery } from "@apollo/client";
-import { Get_PRODUITS } from "../../../Api/Query/Query";
+import { useParams } from "react-router-dom";
+import { Get_Categorie } from "../../../Api/Query/QueryFindByCtegorie";
 
-export default function Product() {
-  let { error, data, loading } = useQuery(Get_PRODUITS);
+
+export default function ProductCategorie() {
+  const { loading, data, error } = Get_Categorie(useParams().id);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
   return (
     <>
       <div className="container pb-16">
         <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">
-          Article
+          <p className="mt-5">Categorie :<span className="">{data.categorie.name}</span></p>
         </h2>
         <div className="grid grid-cols-4 gap-6">
-          {data.products.map((produit, i) => {
+          {data.categorie.products.map((produit, i) => {
             return (
               <div key={i}>
                 <div className="bg-white shadow rounded overflow-hidden group">
@@ -22,7 +23,9 @@ export default function Product() {
                       alt="product 1"
                       className="w-full"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                    <div
+                      className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition"
+                    >
                       <a
                         href="#"
                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
@@ -71,9 +74,8 @@ export default function Product() {
                           <i className="fa-solid fa-star"></i>
                         </span>
                       </div>
-                      <div className=" text-gray-500 ml-3">
-                        {produit.categorie.name}
-                      </div>
+                     <div className=" text-gray-500 ml-3">{data.categorie.name}</div>
+
                     </div>
                   </div>
                   <a

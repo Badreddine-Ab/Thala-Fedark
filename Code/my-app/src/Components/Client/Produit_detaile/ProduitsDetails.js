@@ -1,11 +1,12 @@
-import React from "react"
-import { Get_PRODUITS } from "../../../Api/Query/Query";
-import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
+import { Get_Product } from "../../../Api/Query/QueryFindByCtegorie";
 
 export default function ProduitsDetails({children}) {
-  let { error, data, loading } = useQuery(Get_PRODUITS);
-  if (loading) return <div>Loading...</div>;
+  const{loading,data,error}=Get_Product(useParams().id)
+    if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
+  console.log(data.product);  
+
 
   return (
     <div>
@@ -22,7 +23,7 @@ export default function ProduitsDetails({children}) {
                     href="#"
                     className="mr-2 text-sm font-medium text-gray-900"
                   >
-                    Clothing
+                   { data.product.categorie.name}
                   </a>
                   <svg
                     width="16"
@@ -39,13 +40,11 @@ export default function ProduitsDetails({children}) {
               </li>
             </ol>
           </nav>
-          {data.produits.map((val) => {
-            return (
               <>
                 <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                   <div className="aspect-w-3 aspect-h-4  overflow-hidden rounded-lg lg:block">
                     <img
-                      src={val.images}
+                      src={data.product.images}
                       alt="Two each of gray, white, and black shirts laying flat."
                       className="h-full w-full object-cover object-center"
                     />
@@ -70,11 +69,11 @@ export default function ProduitsDetails({children}) {
                    
                   <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                     <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                      Basic Tee 6-Pack
+                    {data.product.name}
                     </h1>
                     <div className="mt-4 lg:row-span-3 lg:mt-0">
                     <h2 className="sr-only">Product information</h2>
-                    <p className="text-3xl tracking-tight text-gray-900">{val.prix} Dh</p>
+                    <p className="text-3xl tracking-tight text-gray-900">{data.product.prix} Dh</p>
 
                     <div className="mt-6">
                       <h3 className="sr-only">Reviews</h3>
@@ -265,18 +264,18 @@ export default function ProduitsDetails({children}) {
 
                       <div className="space-y-6">
                         <p className="text-base text-gray-900">
-                        {val.description}
+                   { data.product.description}
                         </p>
                       </div>
                     </div>
 
 
                     <div className="mt-10">
-                      <h2 className="">
+                      {/* <h2 className="">
                         Details
-                      </h2>
+                      </h2> */}
 
-                      <div className="mt-4 space-y-6">
+                      {/* <div className="mt-4 space-y-6">
                         <p className="text-sm text-gray-600">
                           The 6-Pack includes two black, two white, and two
                           heather gray Basic Tees. Sign up for our subscription
@@ -284,14 +283,14 @@ export default function ProduitsDetails({children}) {
                           like our upcoming &quot;Charcoal Gray&quot; limited
                           release.
                         </p>
-                      </div>
+                      </div> */}
                    
                     </div>
                   </div>
                 </div>
               </>
-            );
-          })}
+            {/* ); */}
+          {/* })} */}
         </div>
       </div>
     </div>
