@@ -14,10 +14,7 @@ module.exports= {
               ],
             });
           },
-        categorie: async() =>{
-            const categorie = await Categorie.findByPk(id)
-            return categorie
-        } ,
+        categorie: (_, { id }) => Categorie.findByPk(id, { include: [{ model: Product }] }),
         products: () => {
             return Product.findAll({
               include: [

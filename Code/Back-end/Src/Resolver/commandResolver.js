@@ -15,18 +15,9 @@ module.exports = {
     },
     StatistiqueAchats: async (_, args) => {
       let { StartDate, EndDate } = args;
-      if (!StartDate || !EndDate)
-        throw new Error("Please remplire tous les Date");
-      if (StartDate > EndDate)
-        throw new Error("The end date cannot be earlier than the start date");
-
-      return await Commande.count({
-        where: {
-          createdAt: {
-            [Op.between]: [StartDate, EndDate],
-          },
-        },
-      });
+      if (!StartDate || !EndDate) throw new Error("Please remplire tous les Date");
+      if (StartDate > EndDate) throw new Error("The end date cannot be earlier than the start date");
+      return await Commande.count({ where: { createdAt: { [Op.between]: [StartDate, EndDate]}}});
     },
   },
 
@@ -34,9 +25,9 @@ module.exports = {
     AddCommand: async (_, args) => {
       try {
         const { prixTotal, quantite, idUser } = args;
-        if (!prixTotal || !quantite || !idUser) {
+        if (!prixTotal || !quantite || !idUser) 
           throw new Error("Please remplire tous les champs");
-        }
+        
         return await Commande.create({
           prixTotal: prixTotal,
           quantite: quantite,
