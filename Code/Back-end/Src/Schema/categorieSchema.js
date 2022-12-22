@@ -39,6 +39,7 @@ extend type Query{
     products: [Product]
     categorie(id: ID!): Categorie
     product(id: ID!): Product
+    searchProduct(name: String!): Product
 }
 
 extend type Mutation{
