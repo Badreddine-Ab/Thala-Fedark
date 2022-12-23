@@ -34,6 +34,15 @@ input ProductInput {
   categorieId: ID!
 }
 
+input UpdateProductStockInput {
+  id: ID!
+  stock: Int!
+}
+
+type UpdateProductStockPayload {
+  product: Product
+}
+
 extend type Query{
     categories: [Categorie]
     products: [Product]
@@ -49,6 +58,7 @@ extend type Mutation{
     createProduct(input: ProductInput!): Product!
     updateProduct(id: ID!, input: ProductInput!): Product!
     deleteProduct(id: ID!): Product!
-    
+    updateProductStock(input: UpdateProductStockInput!): UpdateProductStockPayload
+
 }
 `
