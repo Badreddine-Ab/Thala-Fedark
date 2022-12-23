@@ -22,4 +22,8 @@ module.exports = gql`
     updateCommand(id:ID!,etat:String!): Boolean
     deleteCommande(id:ID!): Boolean
  }
+
+ type Subscription{
+   Selectcommande:[Commande]
+ }
  `
