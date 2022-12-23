@@ -7,19 +7,10 @@ import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
 import PageNotfound from './Pages/404.jsx'
 import Upload from './Components/Client/upload'
-import PageNotfound from './Pages/404.jsx';
 import Produit from './Pages/Admin/produit'
 import Command from './Pages/Admin/command'
-
-import Accueil from "./Pages/Client/accueil";
-import GetCategory from "./Pages/Client/GetProduitByCategory";
-import SearchbyName from "./Pages/Client/GetProduitByName";
-import Login from "./Pages/Auth/Login";
-import Register from "./Pages/Auth/Register";
-import PageNotfound from "./Pages/404.jsx";
-import Produit from "./Pages/Admin/produit";
-import Command from "./Pages/Admin/command";
 import Shop from "./Pages/Client/Shop";
+import Test from "./Pages/Admin/test"
 
 function App() {
   return (
@@ -34,6 +25,7 @@ function App() {
           <Route path="/up" element={<Upload/>}/>
           <Route path="/produit" element={<Produit/>}/>
           <Route path="/command" element={<Command/>}/>
+          <Route path="/Table" element={<Test />}/>
         </Routes>
       </BrowserRouter>
   

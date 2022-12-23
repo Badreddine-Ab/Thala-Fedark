@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Get_PRODUITS } from "../../../Api/Query/Query";
-
+import { Link } from "react-router-dom";
 export default function Product() {
   let { error, data, loading } = useQuery(Get_PRODUITS);
   if (loading) return <div>Loading...</div>;
@@ -23,13 +23,15 @@ export default function Product() {
                       className="w-full"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                      <a
-                        href="#"
-                        className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                        title="view product"
-                      >
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                      </a>
+                      <Link to={`search/${produit.id}`}>
+                        <p
+                          className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
+                          title="view product"
+                        >
+                          <i className="fa-solid fa-magnifying-glass"></i>
+                        </p>
+                      </Link>
+
                       <a
                         href="#"
                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"

@@ -1,12 +1,11 @@
 import { useParams } from "react-router-dom";
 import { Get_Product } from "../../../Api/Query/QueryFindByCtegorie";
 
-export default function ProduitsDetails({children}) {
-  const{loading,data,error}=Get_Product(useParams().id)
-    if (loading) return <div>Loading...</div>;
+export default function ProduitsDetails({ children }) {
+  const { loading, data, error } = Get_Product(useParams().id);
+  if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
-  console.log(data.product);  
-
+  console.log(data.product);
 
   return (
     <div>
@@ -23,7 +22,7 @@ export default function ProduitsDetails({children}) {
                     href="#"
                     className="mr-2 text-sm font-medium text-gray-900"
                   >
-                   { data.product.categorie.name}
+                    {data.product.categorie.name}
                   </a>
                   <svg
                     width="16"
@@ -40,40 +39,41 @@ export default function ProduitsDetails({children}) {
               </li>
             </ol>
           </nav>
-              <>
-                <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-                  <div className="aspect-w-3 aspect-h-4  overflow-hidden rounded-lg lg:block">
-                    <img
-                      src={data.product.images}
-                      alt="Two each of gray, white, and black shirts laying flat."
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>
-                  <div className="  lg:grid lg:grid-cols-1 lg:gap-y-8">
-                    <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-                      <img
-                        src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg"
-                        alt="Model wearing plain black basic tee."
-                        className="h-full w-full object-cover object-center"
-                      />
-                    </div>
-                    <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-                      <img
-                        src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg"
-                        alt="Model wearing plain gray basic tee."
-                        className="h-full w-full object-cover object-center"
-                      />
-                    </div>
-                  </div>
-                  <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
-                   
-                  <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                    <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          <>
+            <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+              <div className="aspect-w-3 aspect-h-4  overflow-hidden rounded-lg lg:block">
+                <img
+                  src={data.product.images}
+                  alt="Two each of gray, white, and black shirts laying flat."
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+              <div className="  lg:grid lg:grid-cols-1 lg:gap-y-8">
+                <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+                  <img
+                    src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg"
+                    alt="Model wearing plain black basic tee."
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+                <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+                  <img
+                    src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg"
+                    alt="Model wearing plain gray basic tee."
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+              </div>
+              <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
+                <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                  <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                     {data.product.name}
-                    </h1>
-                    <div className="mt-4 lg:row-span-3 lg:mt-0">
+                  </h1>
+                  <div className="mt-4 lg:row-span-3 lg:mt-0">
                     <h2 className="sr-only">Product information</h2>
-                    <p className="text-3xl tracking-tight text-gray-900">{data.product.prix} Dh</p>
+                    <p className="text-3xl tracking-tight text-gray-900">
+                      {data.product.prix} Dh
+                    </p>
 
                     <div className="mt-6">
                       <h3 className="sr-only">Reviews</h3>
@@ -233,67 +233,33 @@ export default function ProduitsDetails({children}) {
                           </div>
                         </fieldset>
                       </div>
-
-                      <div className="mt-10">
-                        <div className="flex items-center justify-between">
-                          <h3 className="text-sm font-medium text-gray-900">
-                            Add
-                          </h3>
-                        
+                      <div className="py-1 my-3 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 ">
+                        <div>
+                          <h2 className="my-3 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                            Description
+                          </h2>
+                          <div className="space-y-6">
+                            <p className="text-base text-gray-900">
+                              {data.product.description}
+                            </p>
+                          </div>
                         </div>
-
                       </div>
+                      <div className="mt-10"></div>
 
-                    {children}
+                      {children}
                     </form>
                   </div>
-
-                  </div>
-
-
-                  </div>
                 </div>
+              </div>
+            </div>
 
-                <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8X ">
-                 
-
-                  
-                  <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
-                    <div>
-                      <h3 className="mt-1">Description</h3>
-
-                      <div className="space-y-6">
-                        <p className="text-base text-gray-900">
-                   { data.product.description}
-                        </p>
-                      </div>
-                    </div>
-
-
-                    <div className="mt-10">
-                      {/* <h2 className="">
-                        Details
-                      </h2> */}
-
-                      {/* <div className="mt-4 space-y-6">
-                        <p className="text-sm text-gray-600">
-                          The 6-Pack includes two black, two white, and two
-                          heather gray Basic Tees. Sign up for our subscription
-                          service and be the first to get new, exciting colors,
-                          like our upcoming &quot;Charcoal Gray&quot; limited
-                          release.
-                        </p>
-                      </div> */}
-                   
-                    </div>
-                  </div>
-                </div>
-              </>
-            {/* ); */}
+            <div className="mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8X "></div>
+          </>
+          {/* ); */}
           {/* })} */}
         </div>
       </div>
     </div>
   );
 }
-

@@ -22,3 +22,19 @@ export const FIND_ALL_CATGORIE = gql`
   }
 }
 `;
+
+
+export const FIND_ALL_Commande = gql`
+query Querycommande {
+  Querycommande {
+    etat
+    prixTotal
+    id
+    quantite
+    user {
+      name
+      email
+    }
+  }
+}
+`;

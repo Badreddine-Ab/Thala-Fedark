@@ -1,5 +1,5 @@
 import {Layout,Search}from "../../Router/AccueilRouter"
-import ProductCategorie from "../../Components/Client/Produit_detaile/product-byCatgeorie.js"
+import ProductCategorie from "../../Components/Client/Produit_detaile/product-byCatgeorie.jsx"
 
 
 
