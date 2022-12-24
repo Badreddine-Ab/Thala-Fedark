@@ -6,7 +6,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
 ;
 
  const Client = new ApolloClient({
-  uri:"https://renewed-starling-61.hasura.app/v1/graphql",
+  uri:"http://localhost:9090",
   cache: new InMemoryCache(),
  })
 
