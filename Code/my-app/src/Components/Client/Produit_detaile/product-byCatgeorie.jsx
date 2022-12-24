@@ -12,46 +12,7 @@ export default function ProductCategorie() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [productIndex, setProductIndex] = useState(-1)
-  // const addToPanel = (product, i) => {
-  //   setIsLoading(true)
-  //   //for spinner
-  //   setProductIndex(i)
-
-  //   // get All products that we saved in local storage
-  //   let oldProducts = localStorage.getItem('cartProducts')
-
-  //   // no products were found in local storage : undefined
-  //   if (!oldProducts) {
-  //     // replace undefined with new product
-  //     oldProducts = [{ ...product, quant: 1 }]
-  //   }
-
-  //   // append new product to saved products
-  //   else {
-  //     oldProducts = JSON.parse(oldProducts)
-  //     // search the cart for index of this product
-
-  //     let index = oldProducts.findIndex(p => p.id === product.id)
-  //     // if product was not found
-  //     if (index == -1) {
-  //       // add new product to cart with quantity 1
-  //       oldProducts.push({ ...product, quant: 1 })
-  //     }
-  //     else {
-  //       // product was found in cart
-  //       // increase quantity by 1
-  //       oldProducts[index].quant += 1
-  //     }
-  //   }
-
-  //   // save modification
-  //   localStorage.setItem('cartProducts', JSON.stringify(oldProducts))
-
-  //   setTimeout(() => {
-  //     setIsLoading(false)
-  //     setProductIndex(-1)
-  //   }, 1000);
-  // }
+ 
 
 
   return (
@@ -64,7 +25,6 @@ export default function ProductCategorie() {
           {data.categorie.products.map((produit, i) => {
             return (
               <div key={i}>
-                {/* {console.log(produit)} */}
                 <div className="bg-white shadow rounded overflow-hidden group">
                   <div className="relative">
                     <img
