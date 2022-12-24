@@ -1,78 +1,33 @@
 import { useEffect, useState } from "react";
 export default function component_card(props) {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    let product = JSON.parse(localStorage.getItem("cartProducts"));
 
-    if (!product) {
-        product = []
-    }
-    if (!cart) {
-        cart = []
-    }
+    let cart = JSON.parse(localStorage.getItem("cartProducts"));
 
-    let thisCartQuant = cart.find(e => e.id == props.id)?.quant || 1
-    let thisCartPrixTotal = cart.find(e => e.id == props.id)?.prixTotal || props.prix
-
-
-    const [quant, setQuant] = useState(thisCartQuant)
-    const [prixTotal, setPrixTotal] = useState(thisCartPrixTotal)
+    const [quant, setQuant] = useState(props.quant)
 
     function changeQuantity(e) {
-        const quantity = e.target.value
-        setPrixTotal(props.prix * quantity)
-        setQuant(e.target.value)
+        // change quantity of corresponding product
+        // call updateproducts // to save modification in parent
+        // save products in local storage
+
+        let newQuant = e.target.value
+        setQuant(newQuant)
+        let newProducts = cart.map(p => {
+            if (p.id == props.id)
+                p.quant = newQuant
+
+            return p
+        })
+        props.updateProducts(newProducts)
+        localStorage.setItem("cartProducts", JSON.stringify(newProducts))
     }
-
-
-    //get total price from cart
-    let thisTotalPrice = cart.find(e => e.id == props.id)?.totalPrice || prixTotal
-    const [totalPrice, setTotalPrice] = useState(thisTotalPrice)
-
-
-    useEffect(() => {
-        const products_ = {
-            name: props.name,
-            prix: props.prix,
-            quant: quant,
-            prixTotal: prixTotal,
-            id: props.id,
-            images: props.images,
-        }
-        if (!cart) {
-            cart = [products_]
-        } else {
-            if (cart.some(e => e.id == props.id)) {
-                cart = cart.map(p => {
-                    if (p.id == props.id) {
-                        return products_
-                    }
-                    return p
-                })
-            } else {
-                cart.push(products_)
-            }
-            //get total price from cart
-            let total = 0
-            for (let i = 0; i < cart.length; i++) {
-                total += cart[i].prixTotal
-            }
-            setTotalPrice(total)
-            console.log(total);
-        }
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [quant])
-
-    localStorage.setItem('total', totalPrice)
-    console.log(totalPrice)
-
 
     //delete from cart
     const deleteFromCart = (id) => {
-        let newProducts = product.filter((data) => data.id !== id);
+        let newProducts = cart.filter((data) => data.id !== id);
+        props.updateProducts(newProducts)
         localStorage.setItem("cartProducts", JSON.stringify(newProducts));
-        window.location.reload();
     }
-
     return (
         <div className="flex justify-center my-6 container" >
             <div className="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
@@ -94,7 +49,7 @@ export default function component_card(props) {
                             <tr>
                                 <td>
                                     <button type="button" className="text-gray-700 md:ml-4" onClick={() => { deleteFromCart(props.id) }}>
-                                        <i class="fa-regular fa-circle-xmark" style={{ fontSize: "40px" }}></i>
+                                        <i className="fa-regular fa-circle-xmark" style={{ fontSize: "40px" }}></i>
                                     </button>
                                 </td>
                                 <td className="pb-4 md:table-cell">
@@ -116,14 +71,11 @@ export default function component_card(props) {
                                     </div>
                                 </td>
                                 <td className="text-right">
-                                    <input size="1"
-                                        value={props.prix}
-                                        readOnly>
-                                    </input>
+                                    {props.prix}
                                 </td>
                                 <td className="text-right">
                                     <span className="text-sm lg:text-base font-medium">
-                                        <p className='total_price'> {prixTotal} €
+                                        <p className='total_price'> {quant * props.prix}€
                                         </p>
                                     </span>
                                 </td>

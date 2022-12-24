@@ -2,18 +2,22 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import Component_card from './component_card';
 export default function Card() {
-    const products = JSON.parse(localStorage.getItem("cartProducts"));
-    const total_ziko = JSON.parse(localStorage.getItem("total"));
-
-    const [total, setTotal] = useState(total_ziko)
+    const [total, setTotal] = useState(0)
+    const [products, setProducts] = useState()
 
     useEffect(() => {
-        setInterval(() => {
-            setTotal(JSON.parse(localStorage.getItem("total")))
-        }, 100);
-    }, [total])
+        setProducts(JSON.parse(localStorage.getItem("cartProducts")))
+    }, [])
 
-
+    useEffect(() => {
+        if (products) {
+            let total = 0
+            for (let i = 0; i < products.length; i++) {
+                total += products[i].quant * products[i].prix
+            }
+            setTotal(total)
+        }
+    }, [products])
 
     if (products) {
         return (
@@ -22,11 +26,14 @@ export default function Card() {
                     products.map((data, i) => (
 
                         <Component_card
-                            key={i}
+                            key={data.id}
                             id={data.id}
                             images={data.images}
                             name={data.name}
                             prix={data.prix}
+                            quant={data.quant}
+                            updateTotal={setTotal}
+                            updateProducts={setProducts}
                         />
 
                     ))
@@ -114,9 +121,9 @@ export default function Card() {
                 <p className="border border-sky-500 w-full p-6 mb-5">Your cart is currently Empty</p>
                 <div className="flex justify-end">
                     <Link to="/">
-                        <button class="group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow mt-2">
-                            <div class="absolute inset-0 w-3 bg-rose-500 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-                            <span class="relative text-black group-hover:text-white">return to shop</span>
+                        <button className="group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow mt-2">
+                            <div className="absolute inset-0 w-3 bg-rose-500 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+                            <span className="relative text-black group-hover:text-white">return to shop</span>
                         </button>
                     </Link>
                 </div>

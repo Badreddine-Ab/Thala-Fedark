@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+import { json } from "react-router-dom";
 import { Get_PRODUITS } from "../../../Api/Query/Query";
 
 export default function Product() {
@@ -12,23 +13,33 @@ export default function Product() {
     //for spinner
     setProductIndex(i)
 
-    // get All saved product from localstorage
+    // get All products that we saved in local storage
     let oldProducts = localStorage.getItem('cartProducts')
 
-    // undefiended
+    // no products were found in local storage : undefined
     if (!oldProducts) {
-      oldProducts = [product]
+      // replace undefined with new product
+      oldProducts = [{ ...product, quant: 1 }]
     }
+
     // append new product to saved products
     else {
       oldProducts = JSON.parse(oldProducts)
-      // check if product already exist
+      // search the cart for index of this product
+
       let index = oldProducts.findIndex(p => p.id === product.id)
-      // if not exist
+      // if product was not found
       if (index == -1) {
-        oldProducts.push(product)
+        // add new product to cart with quantity 1
+        oldProducts.push({ ...product, quant: 1 })
+      }
+      else {
+        // product was found in cart
+        // increase quantity by 1
+        oldProducts[index].quant += 1
       }
     }
+
     // save modification
     localStorage.setItem('cartProducts', JSON.stringify(oldProducts))
 
