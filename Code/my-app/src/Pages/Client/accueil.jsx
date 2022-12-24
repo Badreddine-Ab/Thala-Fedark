@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Toppage, Product, Categories, Recomende, Offre, Search, Button } from "../../Router/AccueilRouter"
+import {Layout,Toppage,Product,Categories,Recomende, Offre,Search}from "../../Router/AccueilRouter"
 
 function Accueil() {
   return (

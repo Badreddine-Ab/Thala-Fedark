@@ -1,64 +1,67 @@
-import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
+import { Get_Categorie } from "../../../Api/Query/QueryFindByCtegorie";
 import { useEffect, useState } from "react";
-import { json } from "react-router-dom";
-import { Get_PRODUITS } from "../../../Api/Query/Query";
 
-export default function Product() {
-  let { error, data, loading } = useQuery(Get_PRODUITS);
-  const [isLoading, setIsLoading] = useState(false)
-  const [productIndex, setProductIndex] = useState(-1)
 
-  const addToPanel = (product, i) => {
-    setIsLoading(true)
-    //for spinner
-    setProductIndex(i)
 
-    // get All products that we saved in local storage
-    let oldProducts = localStorage.getItem('cartProducts')
 
-    // no products were found in local storage : undefined
-    if (!oldProducts) {
-      // replace undefined with new product
-      oldProducts = [{ ...product, quant: 1 }]
-    }
-
-    // append new product to saved products
-    else {
-      oldProducts = JSON.parse(oldProducts)
-      // search the cart for index of this product
-
-      let index = oldProducts.findIndex(p => p.id === product.id)
-      // if product was not found
-      if (index == -1) {
-        // add new product to cart with quantity 1
-        oldProducts.push({ ...product, quant: 1 })
-      }
-      else {
-        // product was found in cart
-        // increase quantity by 1
-        oldProducts[index].quant += 1
-      }
-    }
-
-    // save modification
-    localStorage.setItem('cartProducts', JSON.stringify(oldProducts))
-
-    setTimeout(() => {
-      setIsLoading(false)
-      setProductIndex(-1)
-    }, 1000);
-  }
+export default function ProductCategorie() {
+  const { loading, data, error } = Get_Categorie(useParams().id);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [productIndex, setProductIndex] = useState(-1)
+  // const addToPanel = (product, i) => {
+  //   setIsLoading(true)
+  //   //for spinner
+  //   setProductIndex(i)
+
+  //   // get All products that we saved in local storage
+  //   let oldProducts = localStorage.getItem('cartProducts')
+
+  //   // no products were found in local storage : undefined
+  //   if (!oldProducts) {
+  //     // replace undefined with new product
+  //     oldProducts = [{ ...product, quant: 1 }]
+  //   }
+
+  //   // append new product to saved products
+  //   else {
+  //     oldProducts = JSON.parse(oldProducts)
+  //     // search the cart for index of this product
+
+  //     let index = oldProducts.findIndex(p => p.id === product.id)
+  //     // if product was not found
+  //     if (index == -1) {
+  //       // add new product to cart with quantity 1
+  //       oldProducts.push({ ...product, quant: 1 })
+  //     }
+  //     else {
+  //       // product was found in cart
+  //       // increase quantity by 1
+  //       oldProducts[index].quant += 1
+  //     }
+  //   }
+
+  //   // save modification
+  //   localStorage.setItem('cartProducts', JSON.stringify(oldProducts))
+
+  //   setTimeout(() => {
+  //     setIsLoading(false)
+  //     setProductIndex(-1)
+  //   }, 1000);
+  // }
+
 
   return (
     <>
       <div className="container pb-16">
         <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">
-          Article
+          <p className="mt-5">Categorie :<span className="">{data.categorie.name}</span></p>
         </h2>
         <div className="grid grid-cols-4 gap-6">
-          {data.produits.map((produit, i) => {
+          {data.categorie.products.map((produit, i) => {
             return (
               <div key={i}>
                 {/* {console.log(produit)} */}
@@ -120,13 +123,14 @@ export default function Product() {
                           <i className="fa-solid fa-star"></i>
                         </span>
                       </div>
-                      <div className="text-xs text-gray-500 ml-3">(150)</div>
+                     <div className=" text-gray-500 ml-3">{data.categorie.name}</div>
+
                     </div>
                   </div>
                   <button onClick={() => { addToPanel(produit, i) }}
                     type="button"
                     className="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">
-                    Add to cart
+                    Add to cart 3
                     {isLoading && productIndex == i &&
                       <div role="status">
                         <svg className="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

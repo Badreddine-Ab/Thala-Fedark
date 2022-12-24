@@ -33,8 +33,8 @@ function Search() {
                 <p className="flex items-center px-6 py-3 hover:bg-white transition top-full	">
                   <span className="ml-6 text-gray-600 text-sm">
                     <div className="">
-                      {data.produits
-                        .filter((val, key) => {
+                      {data.products
+                        .filter((val) => {
                           if (search == "") return val;
                           else if (
                             val.name

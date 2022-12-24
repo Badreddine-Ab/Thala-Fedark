@@ -10,7 +10,7 @@ export default function component_card(props) {
         // call updateproducts // to save modification in parent
         // save products in local storage
 
-        let newQuant = e.target.value
+        let newQuant = parseInt(e.target.value)
         setQuant(newQuant)
         let newProducts = cart.map(p => {
             if (p.id == props.id)
