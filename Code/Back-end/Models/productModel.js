@@ -7,7 +7,7 @@ const product = db.define('product', {
         type: Sequelize.STRING 
     },
     description : {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
     },
     prix : {
         type : Sequelize.FLOAT
@@ -16,14 +16,17 @@ const product = db.define('product', {
         type : Sequelize.INTEGER
     },
     ventes : {
-        type : Sequelize.INTEGER
+        type : Sequelize.INTEGER,
+        defaultValue: 0,
     },
     ventes_promo : {
-        type : Sequelize.INTEGER
+        type : Sequelize.INTEGER,
+        defaultValue: 0,
     },
     images: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
-   }
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        defaultValue: "no picture for this product",
+    }
 })
 
 promotion.hasMany(product)
