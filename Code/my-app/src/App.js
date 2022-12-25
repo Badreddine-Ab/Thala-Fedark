@@ -8,7 +8,6 @@ import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
 import PageNotfound from './Pages/404.jsx'
 import Upload from './Components/Client/upload'
-import PageNotfound from './Pages/404.jsx';
 import Produit from './Pages/Admin/produit'
 import Command from './Pages/Admin/command'
 
