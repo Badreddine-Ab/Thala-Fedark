@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Accueil from './Pages/Client/accueil';
 import GetCategory from './Pages/Client/GetProduitByCategory'
 import SearchbyName from './Pages/Client/GetProduitByName'
+
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
 import PageNotfound from './Pages/404.jsx'
@@ -13,6 +14,8 @@ import Shop from "./Pages/Client/Shop";
 import Test from "./Pages/Admin/test"
 import Product from "./Pages/Admin/Product"
 import Categorie from "./Pages/Admin/Categorie"
+import Cart from './Pages/Client/Cart';
+
 
 function App() {
   return (
@@ -30,11 +33,10 @@ function App() {
           <Route path="/Table" element={<Test />}/>
           <Route path="/product" element={<Product />}/>
           <Route path="/categorie" element={<Categorie />}/>
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
-  
-       
-  );
+  )
 }
 
 export default App;

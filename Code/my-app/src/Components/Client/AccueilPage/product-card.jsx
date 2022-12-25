@@ -1,10 +1,15 @@
 import { useQuery } from "@apollo/client";
 import { Get_PRODUITS } from "../../../Api/Query/Query";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Button from "../button";
 export default function Product() {
+
   let { error, data, loading } = useQuery(Get_PRODUITS);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
+
+ 
   return (
     <>
       <div className="container pb-16">
@@ -78,12 +83,7 @@ export default function Product() {
                       </div>
                     </div>
                   </div>
-                  <a
-                    href="#"
-                    className="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition"
-                  >
-                    Add to cart
-                  </a>
+                 <Button product={produit} />
                 </div>
               </div>
             );
