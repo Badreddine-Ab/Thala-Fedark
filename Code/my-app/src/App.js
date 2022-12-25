@@ -11,6 +11,8 @@ import Produit from './Pages/Admin/produit'
 import Command from './Pages/Admin/command'
 import Shop from "./Pages/Client/Shop";
 import Test from "./Pages/Admin/test"
+import Product from "./Pages/Admin/Product"
+import Categorie from "./Pages/Admin/Categorie"
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/produit" element={<Produit/>}/>
           <Route path="/command" element={<Command/>}/>
           <Route path="/Table" element={<Test />}/>
+          <Route path="/product" element={<Product />}/>
+          <Route path="/categorie" element={<Categorie />}/>
         </Routes>
       </BrowserRouter>
   

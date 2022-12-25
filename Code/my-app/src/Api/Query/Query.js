@@ -2,16 +2,18 @@ import { gql } from "@apollo/client";
 
 export const Get_PRODUITS = gql`
   query ListeProduit {
-    products {
-      description
-      id
-      images
+  products {
+    id
+    images
+    name
+    prix
+    stock
+    ventes
+    ventes_promo
+    categorie {
       name
-      prix
-      categorie {
-        name
-      }
-    }
+  }
+}
   }
 `;
 export const FIND_ALL_CATGORIE = gql`

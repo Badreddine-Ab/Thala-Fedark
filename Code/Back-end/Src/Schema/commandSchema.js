@@ -25,5 +25,6 @@ module.exports = gql`
 
  type Subscription{
    Selectcommande:[Commande]
+   
  }
  `

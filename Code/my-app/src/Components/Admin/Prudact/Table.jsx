@@ -1,63 +1,63 @@
-import { useQuery,useMutation } from "@apollo/client";
-import { FIND_ALL_Commande } from "../../Api/Query/Query";
-import { Delete_Command } from "../../Api/Mutation/MutationCommand";
+import { useQuery, useMutation } from "@apollo/client";
+import { Get_PRODUITS } from "../../../Api/Query/Query";
+import { Delete_Prduct } from "../../../Api/Mutation/MutationProduct";
+import Modal from './addCommand'
 
-export default function TableComponents(props) {
-  const { loading, data, error } = useQuery(FIND_ALL_Commande);
-  const [deleteCommande]=useMutation(Delete_Command)
+export default function Table() {
+  const { loading, data, error } = useQuery(Get_PRODUITS);
+  const [deleteProduct] = useMutation(Delete_Prduct);
 
-  const deletecommand=(deleteCommandeId)=>{
-    deleteCommande({
-      variables:{
-        deleteCommandeId,
-      }
-    })
+  const deleteproduct = (deleteProductId) => {
+    deleteProduct({
+      variables: {
+        deleteProductId,
+      },
+    });
     console.log("click me");
-
-  }
+  };
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
-  return (
-    <>
-      <h4 className="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-        Table with actions
-      </h4>
-      <div className="form-group">
-        <button className="btn btn-sm btn-primary"
-        data-taggle="modal"
-        data-target="#addCommand"
-        >
 
-        </button>
-      </div>
-      <div className="w-full overflow-hidden rounded-lg shadow-xs px-5">
+  
+  return (
+  
+    <>
+     
+    
+      <div className="w-full overflow-hidden rounded-lg shadow-xs">
         <div className="w-full overflow-x-auto">
+        <Modal ModelName="Add Product" />
+
           <table className="w-full whitespace-no-wrap">
             <thead>
               <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400">
                 <th className="px-4 py-3" hidden>
                   Id
                 </th>
-                <th className="px-4 py-3">{props.type}</th>
+                <th className="px-4 py-3">Image</th>
+                <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Prix</th>
-                <th className="px-4 py-3">Quantite</th>
-                <th className="px-4 py-3">TotalPrix</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3">Actions</th>
+                <th className="px-4 py-3">Stock</th>
+                <th className="px-4 py-3">Ventes</th>
+                <th className="px-4 py-3">Ventes promo</th>
+                <th className="px-4 py-3">Categorie</th>
+                <th className="px-4 py-3">Action</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-              {data.Querycommande.map((command, i) => {
+              {data.products.map((product, i) => {
                 return (
                   <tr key={i} className="text-gray-700 dark:text-gray-400">
-                    <td className="px-4 py-3 text-sm" hidden>{command.id}</td>
+                    <td className="px-4 py-3 text-sm" hidden>
+                      {product.id}
+                    </td>
 
                     <td className="px-4 py-3">
                       <div className="flex items-center text-sm">
                         <div className="relative w-8 h-8 mr-3 rounded-full md:block">
                           <img
                             className="object-cover w-full h-full rounded-full"
-                            src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                            src={product.images}
                             alt=""
                             loading="lazy"
                           />
@@ -76,18 +76,18 @@ export default function TableComponents(props) {
                     </td>
 
                     <td className="px-4 py-3 text-sm">
-                      {command.prixTotal} Dh
+                      {product.name} 
                     </td>
 
-                    <td className="px-4 py-3 text-sm">{command.quantite}</td>
+                    <td className="px-4 py-3 text-sm">{product.prix}</td>
                     <td className="px-4 py-3 text-sm">
-                      {command.quantite * command.prixTotal} DH
+                      {product.stock} 
                     </td>
-                    <td className="px-4 py-3 text-xs">
-                      <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                        {command.etat}
-                      </span>
-                    </td>
+                    <td className="px-4 py-3 text-sm">{product.ventes}</td>
+                    <td className="px-4 py-3 text-sm">{product.ventes_promo}</td>
+                    <td className="px-4 py-3 text-sm">{product.categorie.name}</td>
+
+                   
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-4 text-sm">
                         <button
@@ -106,10 +106,9 @@ export default function TableComponents(props) {
                         <button
                           className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                           aria-label="Delete"
-                          onClick={()=> deletecommand(command.id)}
+                          onClick={() => deleteproduct(product.id)}
                         >
-{                          command.id
-}                          <svg
+                          <svg
                             className="w-5 h-5"
                             aria-hidden="true"
                             fill="currentColor"
@@ -121,8 +120,6 @@ export default function TableComponents(props) {
                               clip-rule="evenodd"
                             ></path>
                           </svg>
-
-
                         </button>
                       </div>
                     </td>
