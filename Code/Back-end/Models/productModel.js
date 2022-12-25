@@ -1,31 +1,31 @@
 const Sequelize = require('sequelize');
-const {db} = require('../Config/DbConfig');
+const { db } = require('../Config/DbConfig');
 const promotion = require('../Models/promotionModel')
 
 const product = db.define('product', {
-    name : {
-        type: Sequelize.STRING 
+    name: {
+        type: Sequelize.STRING
     },
-    description : {
+    description: {
         type: Sequelize.TEXT
     },
-    prix : {
-        type : Sequelize.FLOAT
+    prix: {
+        type: Sequelize.FLOAT
     },
-    stock : {
-        type : Sequelize.INTEGER
+    stock: {
+        type: Sequelize.INTEGER
     },
-    ventes : {
-        type : Sequelize.INTEGER,
+    ventes: {
+        type: Sequelize.INTEGER,
         defaultValue: 0,
     },
-    ventes_promo : {
-        type : Sequelize.INTEGER,
+    ventes_promo: {
+        type: Sequelize.INTEGER,
         defaultValue: 0,
     },
     images: {
         type: Sequelize.ARRAY(Sequelize.STRING),
-        defaultValue: "no picture for this product",
+        defaultValue: ["no picture for this product"],
     }
 })
 

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Get_Product } from "../../../Api/Query/QueryFindByCtegorie";
+import Button from "../button";
 
 export default function ProduitsDetails({ children }) {
   const { loading, data, error } = Get_Product(useParams().id);
@@ -247,7 +248,7 @@ export default function ProduitsDetails({ children }) {
                       </div>
                       <div className="mt-10"></div>
 
-                      {children}
+                      <Button product={data.product}/>
                     </form>
                   </div>
                 </div>

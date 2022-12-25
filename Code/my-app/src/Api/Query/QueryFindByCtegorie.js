@@ -18,6 +18,7 @@ categorie(id: $categorieId) {
 export const Get_One_PRODUIT = gql`
 query Product($productId: ID!) {
   product(id: $productId) {
+    id
     description
     images
     name

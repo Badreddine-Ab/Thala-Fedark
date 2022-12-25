@@ -53,12 +53,14 @@ export default function Header() {
 
               <div className="flex items-center justify-between flex-grow pl-12">
                 <div className="flex items-center space-x-6 capitalize">
+                <Link to="/">
                   <a
                     href=""
                     className="text-gray-200 hover:text-white transition"
                   >
                     Home
                   </a>
+                  </Link>
                     <Link to ="shop">
                     <p  
                     className="text-gray-200 hover:text-white transition"

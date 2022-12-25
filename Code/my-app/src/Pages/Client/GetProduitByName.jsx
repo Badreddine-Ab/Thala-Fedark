@@ -14,7 +14,7 @@ return <>
  
     <Search />
       <Layout>
-         <ProduitsDetails> <Button /></ProduitsDetails>
+         <ProduitsDetails /> 
       </Layout>
     </>
 

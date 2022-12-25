@@ -4,13 +4,13 @@ import {Layout,Toppage,Product,Categories,Recomende, Offre,Search}from "../../Ro
 function Accueil() {
   return (
     <>
-    <Search />
+      <Search />
       <Layout>
         <Toppage />
-         <Categories />
-         <Product /> 
-         <Offre/>
-         <Recomende />
+        <Categories />
+        <Product />
+        <Offre />
+        <Recomende />
       </Layout>
     </>
   );
