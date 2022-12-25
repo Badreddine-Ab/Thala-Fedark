@@ -1,6 +1,9 @@
 const Categorie = require('../../Models/categorieModel')
 const Product = require('../../Models/productModel');
 const multer = require('multer');
+const {PubSub} = require("graphql-subscriptions")
+
+const pubsub = new PubSub();
 
 const  ApolloError = require("apollo-server");
 
