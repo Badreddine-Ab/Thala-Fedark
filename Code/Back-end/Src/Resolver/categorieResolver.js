@@ -123,20 +123,21 @@ module.exports= {
           // Return the updated product
           return product;
         },
-        async deleteProduct(_, { id }, ) {
-          // Find the product with the given ID
-          const product = await Product.findByPk(id);
-      
-          // If the product does not exist, return an error
-          if (!product) {
-            throw new Error(`Product with ID ${id} not found`);
+        deleteProduct: async (_, args, { pubsub }) => {
+          try {
+            // delete the product from the database
+            const product = await Product.findOne({ where: { id: args.id } });
+            await product.destroy();
+    
+            // publish a message to the productDeleted channel
+            pubsub.publish('productDeleted', { productDeleted: product });
+    
+            // return the deleted product
+            return { product, error: null };
+          } catch (error) {
+            // return the error
+            return { product: null, error };
           }
-      
-          // Destroy the product
-          await product.destroy();
-      
-          // Return the ID of the deleted product
-          return id;
         },
         updateProductStock: async (_, { input }, { db }) => {
           try {
@@ -165,6 +166,13 @@ module.exports= {
           }
         }
       
+    },
+    Subscription: {
+      productDeleted: {
+        subscribe: (_, args, { pubsub }) => {
+          return pubsub.asyncIterator('productDeleted');
+        }
+      }
     }
    
 }
