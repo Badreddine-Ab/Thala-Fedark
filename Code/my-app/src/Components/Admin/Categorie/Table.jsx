@@ -1,12 +1,15 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { FIND_ALL_CATGORIE } from "../../../Api/Query/Query";
 import { Delete_Categorie } from "../../../Api/Mutation/MutationCategorie";
-import Modal from './model'
-import EditeModel from './EditeModel'
+import Modal from "./model";
+import EditeModel from "./EditeModel";
 import { useState } from "react";
 
 export default function Table() {
-  const [Name, SetName] = useState("");
+  const [Name, SetName] = useState({
+    id: "",
+    name: "",
+  });
 
   const { loading, data, error } = useQuery(FIND_ALL_CATGORIE);
   const [deleteCategorie] = useMutation(Delete_Categorie);
@@ -22,15 +25,11 @@ export default function Table() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
 
-  
   return (
-  
     <>
-     
-    
       <div className="w-full overflow-hidden rounded-lg shadow-xs">
         <div className="w-full overflow-x-auto">
-        <Modal ModelName="Add Categorie" />
+          <Modal ModelName="Add Categorie" />
 
           <table className="w-full whitespace-no-wrap">
             <thead>
@@ -50,22 +49,15 @@ export default function Table() {
                       {categorie.id}
                     </td>
 
-
-                    <td className="px-4 py-3 text-sm">
-                      {categorie.name} 
+                    <td className="px-4 py-3 text-sm" name="Name">
+                      {categorie.name}
                     </td>
 
-           
-              
-
-                   
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-4 text-sm">
-                   
-                                                      <EditeModel categorie={Name}/>
-
-                      
-                            
+                        <button onClick={() => SetName(categorie)}>
+                          <EditeModel name={Name} />
+                        </button>
                         <button
                           className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                           aria-label="Delete"

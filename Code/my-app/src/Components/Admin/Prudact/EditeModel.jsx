@@ -1,29 +1,42 @@
 import React, { useState,useEffect } from "react";
-import { useMutation } from "@apollo/client";
-import { Update_Categorie } from "../../../Api/Mutation/MutationCategorie";
+import { useMutation ,useQuery} from "@apollo/client";
+import { Edite_Produit } from "../../../Api/Mutation/MutationProduct";
+import { FIND_ALL_CATGORIE } from "../../../Api/Query/Query";
 
 const EditeModel = (props) => {
   const [showModal, setShowModal] = useState(false);
-  const [updateCategorie, { data, error }] = useMutation(Update_Categorie);
-  const [Name, SetName] = useState("");
-useEffect(()=>{
-  SetName (props.name.name)
-  console.log(props.name.id)
-  
-},[props.name])
+  const [Products, SetProducts] = useState("");
+  const [updateProduct] = useMutation(Edite_Produit);
+  useEffect(()=>{
+    SetProducts (props.Products.name)
+    console.log(props.Products)
+    
+  },[props.Products])
+  const { loading, data, error } = useQuery(FIND_ALL_CATGORIE);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>something went wrong...</div>;
+
+
+const handleChange = (e) => {
+  SetProducts({
+    ...Products,
+    [e.target.name]: e.target.value,
+  });
+};
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
-      updateCategorie({
-        variables: { updateCategorieId: props.name.id,
-          input: {
+      const { description, name, prix, stock, categorieId } = Products;
+
+      updateProduct({
+        variables: { updateProductId: props.Products.id, input: {
           description: description,
           images: "Image",
           name: name,
           prix: parseFloat(prix),
           stock: parseInt(stock),
           categorieId: parseInt(categorieId),
-        }, },
+        },},
       });
       setShowModal(false);
     } catch (e) {
@@ -64,19 +77,70 @@ useEffect(()=>{
                   </button>
                 </div>
                 <form onSubmit={handleSubmit}>
-                  <div className="col-span-9 shadow rounded px-6 pt-5 pb-7">
+                <div className="col-span-9 shadow rounded px-6 pt-5 pb-7">
                     <div className="space-y-4">
-                      <div className="grid grid-cols-1 gap-4">
+                      <div className="grid grid-cols-2 gap-4">
                         <div>
                           <label for="first">Name</label>
                           <input
                             type="text"
                             name="name"
-                            // value={props.name.}
-                            onChange={(e) => SetName(e.target.value)}
+                            onChange={handleChange}
                             className="input-box"
                           />
                         </div>
+                        <div>
+                          <label for="last">Categorie</label>
+                          <select
+                            className="input-box"
+                            name="categorieId"
+                            onChange={handleChange}
+                          >
+                            {data.categories.map((categorie, i) => {
+                              return (
+                                <option value={categorie.id}>
+                                  {categorie.name}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label for="birthday">Prix</label>
+                          <input
+                            type="text"
+                            name="prix"
+                            onChange={handleChange}
+                            className="input-box"
+                          />
+                        </div>
+
+                        <div>
+                          <label for="phone">stock</label>
+                          <input
+                            type="text"
+                            name="stock"
+                            onChange={handleChange}
+                            className="input-box"
+                          />
+                        </div>
+
+                        {/* <div>
+                          <label for="phone">Image</label>
+                          <Upload />
+                        </div> */}
+                      </div>
+                      <div>
+                        <label for="last">Description</label>
+                        <textarea
+                          name="description"
+                          onChange={handleChange}
+                          className="input-box"
+                          rows="5"
+                          cols="33"
+                        ></textarea>
                       </div>
                     </div>
 
@@ -92,7 +156,6 @@ useEffect(()=>{
                         <button
                           type="submit"
                           className="py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium"
-                          // onClick={handleSubmit}
                         >
                           save changes
                         </button>

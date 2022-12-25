@@ -7,10 +7,24 @@ mutation Mutation($deleteProductId: ID!) {
 }
 `;
 
-export const Add_Command = gql`
-mutation AddCommand($prixTotal: Float!, $quantite: Int!, $idUser: ID!) {
-  AddCommand(prixTotal: $prixTotal, quantite: $quantite, idUser: $idUser) {
+export const Add_Produit = gql`
+mutation Mutation($input: ProductInput) {
+  createProduct(input: $input) {
     id
+  }
+}
+`;
+export const Edite_Produit = gql`
+mutation UpdateProduct($updateProductId: ID!, $input: ProductInput!) {
+  updateProduct(id: $updateProductId, input: $input) {
+    categorie {
+      id
+    }
+    description
+    images
+    name
+    prix
+    stock
   }
 }
 `;

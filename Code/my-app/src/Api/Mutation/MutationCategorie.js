@@ -12,3 +12,11 @@ mutation AddCategorie($name: String!) {
   }
 }
 `;
+
+export const Update_Categorie = gql`
+mutation UpdateCategorie($updateCategorieId: ID!, $name: String!) {
+  updateCategorie(id: $updateCategorieId, name: $name) {
+    name
+  }
+}
+`;
