@@ -1,15 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import {Get_PRODUITS} from "../../Api/Query/Query"
+import {FIND_ALL_CATGORIE} from "../../Api/Query/Query"
 
 export default function Header() {
-  //   const navigate = useNavigate();
-  //   function logOut() {
-  //     localStorage.clear();
-  //     navigate("/login");
-  //   }
 
-  const {error,data,loading } = useQuery(Get_PRODUITS);
+  const {error,data,loading } = useQuery(FIND_ALL_CATGORIE);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
   
@@ -33,14 +28,14 @@ export default function Header() {
                <div className="absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
 
                  
-                  {data.produits.map((produit, i) => {
+                  {data.categories.map((categorie, i) => {
             return (
                
-               <Link to ={`/${produit.id}`}>
+               <Link to ={`/${categorie.id}`}>
                    <p key={i}  
                     className="flex items-center px-6 py-3 hover:bg-gray-100 transition"
                   >
-                    <span className="ml-6 text-gray-600 text-sm">{produit.name}</span>
+                    <span className="ml-6 text-gray-600 text-sm">{categorie.name}</span>
 
                   </p> 
                    
@@ -58,26 +53,30 @@ export default function Header() {
 
               <div className="flex items-center justify-between flex-grow pl-12">
                 <div className="flex items-center space-x-6 capitalize">
+                <Link to="/">
                   <a
-                    href="index.html"
+                    href=""
                     className="text-gray-200 hover:text-white transition"
                   >
                     Home
                   </a>
-                  <a
-                    href="pages/shop.html"
+                  </Link>
+                    <Link to ="shop">
+                    <p  
                     className="text-gray-200 hover:text-white transition"
                   >
                     Shop
-                  </a>
+                  </p>
+                   
+               </Link>
                   <a
-                    href="#"
+                    href=""
                     className="text-gray-200 hover:text-white transition"
                   >
                     About us
                   </a>
                   <a
-                    href="#"
+                    href=""
                     className="text-gray-200 hover:text-white transition"
                   >
                     Contact us

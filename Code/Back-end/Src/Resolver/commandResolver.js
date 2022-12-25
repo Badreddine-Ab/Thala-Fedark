@@ -58,4 +58,17 @@ module.exports = {
       }
     },
   },
+
+  Subscription: {
+    Selectcommande: async () => {
+      return await Commande.findAll({
+        order: [["id", "DESC"]],
+        include: user,
+        raw: true,
+        nest: true,
+      });
+   
+    
+  },
+  }
 };

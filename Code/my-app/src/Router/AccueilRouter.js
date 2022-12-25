@@ -8,12 +8,12 @@ import Search from "../Components/Client/AccueilPage/Search";
 import Button from "../Components/Client/button";
 
 export {
-    Layout,
-    Toppage,
-    Product,
-    Categories,
-    Recomende,
-    Offre,
-    Search,
-    Button,
-  };
+  Layout,
+  Toppage,
+  Product,
+  Categories,
+  Recomende,
+  Offre,
+  Search,
+  Button,
+};
