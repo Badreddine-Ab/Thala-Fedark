@@ -1,7 +1,8 @@
-const { ApolloServer } = require('apollo-server-express');
 const Categorie = require('../../Models/categorieModel')
 const Product = require('../../Models/productModel');
+const multer = require('multer');
 
+const  ApolloError = require("apollo-server");
 
 module.exports= {
     Query: {
@@ -14,10 +15,7 @@ module.exports= {
               ],
             });
           },
-        categorie: async() =>{
-            const categorie = await Categorie.findByPk(id)
-            return categorie
-        } ,
+        categorie: (_, { id }) => Categorie.findByPk(id, { include: [{ model: Product }] }),
         products: () => {
             return Product.findAll({
               include: [
@@ -28,8 +26,21 @@ module.exports= {
             });
           },
     
-        product: (_, { id },) => findByPk(id), 
+          product: (_, { id }) => Product.findByPk(id, {
+            include: [{ model: Categorie }],
+          }),
+
+          
+          searchProduct: (root, args, context) => {
+            return Product.findOne({
+              where: {
+                name: args.name,
+              },
+            });
+          },
+           
     },
+
     Mutation: {
         addCategorie: async (_, args) => {
            try {
@@ -87,24 +98,73 @@ module.exports= {
             }
             
           },
-        //   addProduct: (parent, { name, description, stock, images, categorieId }) => {
-        //     return Product.create({ name, description, stock, images, categorieId });
-        //   },
-          updateProduct: (parent, { id, name, description, stock, images, categorieId }) => {
-            return Product.update({ name, description, stock, images, categorieId }, { where: { id } });
-          },
-          deleteProduct: (parent, { id }) => {
-            return Product.destroy({ where: { id } });
-          },
-          addProduct: (_, {  name, description, stock, images, categorieId }) => {
-            // Use the Sequelize `create` method to create a new product and associate it with the specified category
-            return Product.create( {name, description, stock, images, categorieId}, {
-              include: [{
-                model: Categorie,
-                as: 'categorie'
-              }]
-            });
+        async createProduct(_, { input }) {
+          // Process the uploaded images and save their URLs in the input object
+          input.images = input.images.map(file => `http://localhost:9090/${file.path}`);
+      
+          // Create a new product using the input data
+          const product = await Product.create(input);
+      
+          // Return the created product
+          return product;
+        },
+        async updateProduct(_, { id, input }, ) {
+          // Find the product with the given ID
+          const product = await Product.findByPk(id);
+      
+          // If the product does not exist, return an error
+          if (!product) {
+            throw new Error(`Product with ID ${id} not found`);
           }
+      
+          // Update the product with the input data
+          await product.update(input);
+      
+          // Return the updated product
+          return product;
+        },
+        async deleteProduct(_, { id }, ) {
+          // Find the product with the given ID
+          const product = await Product.findByPk(id);
+      
+          // If the product does not exist, return an error
+          if (!product) {
+            throw new Error(`Product with ID ${id} not found`);
+          }
+      
+          // Destroy the product
+          await product.destroy();
+      
+          // Return the ID of the deleted product
+          return id;
+        },
+        updateProductStock: async (_, { input }, { db }) => {
+          try {
+            // Find the product with the specified ID
+            const product = await Product.findByPk(input.id);
     
+            if (!product) {
+              // If the product was not found, throw an ApolloError
+              throw new ApolloError(`Product with ID ${input.id} not found`, "NOT_FOUND");
+            }
+    
+            // Update the product's stock
+            product.stock = input.stock;
+    
+            // Save the updated product to the database
+            await product.save();
+    
+            return {
+              product
+            };
+          } catch (error) {
+            // If there was an error, return a custom error message
+            return {
+              error: "An error occurred while updating the product's stock"
+            };
+          }
+        }
+      
     }
+   
 }

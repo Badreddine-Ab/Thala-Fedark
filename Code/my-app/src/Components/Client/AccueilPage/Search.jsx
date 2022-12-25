@@ -1,7 +1,8 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Get_PRODUITS } from "../../../Api/Query/Query";
 import { useQuery } from "@apollo/client";
+import card from "./cart"
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -9,7 +10,7 @@ function Search() {
   const { data, error, loading } = useQuery(Get_PRODUITS);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
- 
+
 
   return (
     <div>
@@ -17,7 +18,7 @@ function Search() {
         <div className="container flex items-center justify-between">
           <span className="text-primary">THALA</span>
           <div className="w-full max-w-xl relative flex">
-      
+
             <div className=" flex cursor-pointer relative group z-10">
               <input
                 type="text"
@@ -32,8 +33,8 @@ function Search() {
                 <p className="flex items-center px-6 py-3 hover:bg-white transition top-full	">
                   <span className="ml-6 text-gray-600 text-sm">
                     <div className="">
-                      {data.produits
-                        .filter((val, key) => {
+                      {data.products
+                        .filter((val) => {
                           if (search == "") return val;
                           else if (
                             val.name
@@ -77,18 +78,19 @@ function Search() {
                 <i className="fa-regular fa-heart"></i>
               </div>
               <div className="text-xs leading-3">Wishlist</div>
-              <div className="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"></div>
+              {/* <div className="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"></div> */}
             </a>
-            <a
-              href="#"
-              className="text-center text-gray-700 hover:text-primary transition relative"
-            >
-              <div className="text-2xl">
-                <i className="fa-solid fa-bag-shopping"></i>
-              </div>
-              <div className="text-xs leading-3">Cart</div>
-              <div className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"></div>
-            </a>
+            <Link to="/cart">
+              <a
+                href="#"
+                className="text-center text-gray-700 hover:text-primary transition relative"
+              >
+                <div className="text-2xl">
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div className="text-xs leading-3">Cart</div>
+              </a>
+            </Link>
             <a
               href="#"
               className="text-center text-gray-700 hover:text-primary transition relative"
