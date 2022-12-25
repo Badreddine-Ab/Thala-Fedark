@@ -12,29 +12,31 @@ import Produit from './Pages/Admin/produit'
 import Command from './Pages/Admin/command'
 import Shop from "./Pages/Client/Shop";
 import Test from "./Pages/Admin/test"
+import Product from "./Pages/Admin/Product"
+import Categorie from "./Pages/Admin/Categorie"
 import Cart from './Pages/Client/Cart';
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Accueil />} />
-        <Route path="/:id" element={<GetCategory />} />
-        <Route path="search/:id" element={<SearchbyName />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="*" element={<PageNotfound />} />
-        <Route path="/up" element={<Upload />} />
-        <Route path="/produit" element={<Produit />} />
-        <Route path="/command" element={<Command />} />
-        <Route path="/Table" element={<Test />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-    </BrowserRouter>
-
-
-  );
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/:id" element={<GetCategory />} />
+          <Route path="search/:id" element={<SearchbyName />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register/>}/>
+          <Route path="*" element={<PageNotfound/>}/>
+          <Route path="/up" element={<Upload/>}/>
+          <Route path="/produit" element={<Produit/>}/>
+          <Route path="/command" element={<Command/>}/>
+          <Route path="/Table" element={<Test />}/>
+          <Route path="/product" element={<Product />}/>
+          <Route path="/categorie" element={<Categorie />}/>
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </BrowserRouter>
+  )
 }
 
 export default App;
