@@ -6,4 +6,5 @@ const categorie = require('./categorieModel')
 const commande = require('./commandeModel')
 const product_commande = require('./produitCommandeModel')
 const favorie = require('./favorieModel')
+
 const product_favorie = require('./productFavorieModel')

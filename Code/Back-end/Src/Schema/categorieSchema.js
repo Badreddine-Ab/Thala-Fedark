@@ -43,6 +43,10 @@ type UpdateProductStockPayload {
   product: Product
 }
 
+type Subscription {
+    productDeleted: Product
+  }
+
 extend type Query{
     categories: [Categorie]
     products: [Product]
@@ -57,8 +61,14 @@ extend type Mutation{
     updateCategorie(id: ID!, name: String!): Categorie
     createProduct(input: ProductInput): Product
     updateProduct(id: ID!, input: ProductInput!): Product!
-    deleteProduct(id: ID!): Product!
+    deleteProduct(id: ID!): DeleteProductResponse
     updateProductStock(input: UpdateProductStockInput!): UpdateProductStockPayload
 
 }
+
+type DeleteProductResponse {
+    product: Product
+    error: String
+  }
+  
 `
