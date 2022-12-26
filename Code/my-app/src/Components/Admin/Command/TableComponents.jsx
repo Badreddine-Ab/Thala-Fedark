@@ -1,42 +1,31 @@
+import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { FIND_ALL_Commande } from "../../../Api/Query/Query";
 import { Delete_Command } from "../../../Api/Mutation/MutationCommand";
-import AddCommand from './addCommand'
+import EditeModel from "./Model";
 
-export default function TableComponents(props) {
+export default function TableComponents() {
   const { loading, data, error } = useQuery(FIND_ALL_Commande);
   const [deleteCommande] = useMutation(Delete_Command);
 
+  const [Etat, SetEtat] = useState({
+    id: "",
+    etat: "",
+  });
   const deletecommand = (deleteCommandeId) => {
     deleteCommande({
       variables: {
         deleteCommandeId,
       },
     });
-    console.log("click me");
   };
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
 
-  
   return (
-  
     <>
-      
-      {/* <h4 className="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-        Table with actions
-      </h4>
-      <div className="form-group">
-        <button
-          className="btn btn-sm btn-primary"
-          data-taggle="modal"
-          data-target="#addCommand"
-        >
-
-        </button>
-      </div> */}
-      <AddCommand />
-      <div className="w-full overflow-hidden rounded-lg shadow-xs">
+      {/* <AddCommand /> */}
+      <div className="w-full overflow-hidden rounded-lg shadow-xs my-7">
         <div className="w-full overflow-x-auto">
           <table className="w-full whitespace-no-wrap">
             <thead>
@@ -44,7 +33,7 @@ export default function TableComponents(props) {
                 <th className="px-4 py-3" hidden>
                   Id
                 </th>
-                <th className="px-4 py-3">{props.type}</th>
+                <th className="px-4 py-3"></th>
                 <th className="px-4 py-3">Prix</th>
                 <th className="px-4 py-3">Quantite</th>
                 <th className="px-4 py-3">TotalPrix</th>
@@ -98,25 +87,15 @@ export default function TableComponents(props) {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-4 text-sm">
-                        <button
-                          className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                          aria-label="Edit"
-                        >
-                          <svg
-                            className="w-5 h-5"
-                            aria-hidden="true"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                          </svg>
+                        <button onClick={() => SetEtat({id:command.id,etat:command.etat})}>
+                          <EditeModel Etats={Etat} />
                         </button>
+
                         <button
                           className="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                           aria-label="Delete"
                           onClick={() => deletecommand(command.id)}
                         >
-                          {command.id}{" "}
                           <svg
                             className="w-5 h-5"
                             aria-hidden="true"

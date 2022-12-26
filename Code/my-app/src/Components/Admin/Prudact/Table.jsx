@@ -1,8 +1,8 @@
-import {useState} from 'react'
+import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { Get_PRODUITS } from "../../../Api/Query/Query";
 import { Delete_Prduct } from "../../../Api/Mutation/MutationProduct";
-import Modal from './model'
+import Modal from "./model";
 import EditeModel from "./EditeModel";
 
 export default function Table() {
@@ -11,13 +11,12 @@ export default function Table() {
   const [Product, SetProduct] = useState({
     id: "",
     name: "",
-    prix:0,
-    stock:0,
-    ventes:0,
-    ventes_promo:0,
-    categorie:0,
-    description:""
-    
+    prix: 0,
+    stock: 0,
+    ventes: 0,
+    ventes_promo: 0,
+    categorie: 0,
+    description: "",
   });
   const deleteproduct = (deleteProductId) => {
     deleteProduct({
@@ -30,15 +29,11 @@ export default function Table() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
 
-  
   return (
-  
     <>
-     
-    
       <div className="w-full overflow-hidden rounded-lg shadow-xs">
         <div className="w-full overflow-x-auto">
-        <Modal ModelName="Add Product" />
+          <Modal ModelName="Add Product" />
 
           <table className="w-full whitespace-no-wrap">
             <thead>
@@ -87,23 +82,22 @@ export default function Table() {
                       </div>
                     </td>
 
-                    <td className="px-4 py-3 text-sm">
-                      {product.name} 
-                    </td>
+                    <td className="px-4 py-3 text-sm">{product.name}</td>
 
                     <td className="px-4 py-3 text-sm">{product.prix}</td>
-                    <td className="px-4 py-3 text-sm">
-                      {product.stock} 
-                    </td>
+                    <td className="px-4 py-3 text-sm">{product.stock}</td>
                     <td className="px-4 py-3 text-sm">{product.ventes}</td>
-                    <td className="px-4 py-3 text-sm">{product.ventes_promo}</td>
-                    <td className="px-4 py-3 text-sm">{product.categorie.name}</td>
-                    <td className="px-4 py-3 text-sm" hidden>{product.description}</td>
+                    <td className="px-4 py-3 text-sm">
+                      {product.ventes_promo}
+                    </td>
+                    <td className="px-4 py-3 text-sm">
+                      {product.categorie.name}
+                    </td>
+                    {/* <td className="px-4 py-3 text-sm" hidden>{product.description}</td> */}
 
-                   
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-4 text-sm">
-                           <button onClick={() => SetProduct(product)}>
+                        <button onClick={() => SetProduct(product)}>
                           <EditeModel Products={Product} />
                         </button>
                         <button

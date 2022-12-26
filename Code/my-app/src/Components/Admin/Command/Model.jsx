@@ -1,21 +1,22 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { Update_Categorie } from "../../../Api/Mutation/MutationCategorie";
+import { Edite_Etat } from "../../../Api/Mutation/MutationCommand";
 
 const EditeModel = (props) => {
   const [showModal, setShowModal] = useState(false);
-  const [updateCategorie, { data, error }] = useMutation(Update_Categorie);
-  const [Name, SetName] = useState("");
-useEffect(()=>{
-  SetName (props.name.name)
-  console.log(props.name.id)
-  
-},[props.name])
+  const [etat, SetEtas] = useState({});
+  const [updateCommand, { data, error }] = useMutation(Edite_Etat);
+  useEffect(()=>{
+    SetEtas (props.Etats.etat)
+    
+  },[props.Etats])
+
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
-      updateCategorie({
-        variables: { updateCategorieId: props.name.id, name: Name },
+      console.log(etat)
+      updateCommand({
+        variables: { updateCommandId: props.Etats.id, etat: etat },
       });
       setShowModal(false);
     } catch (e) {
@@ -36,8 +37,8 @@ useEffect(()=>{
           fill="currentColor"
           viewBox="0 0 20 20"
         >
-        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                          </svg>
+          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+        </svg>
       </button>
       {showModal ? (
         <>
@@ -61,13 +62,15 @@ useEffect(()=>{
                       <div className="grid grid-cols-1 gap-4">
                         <div>
                           <label for="first">Name</label>
-                          <input
+                          <select
                             type="text"
-                            name="name"
-                            // value={props.name.}
-                            onChange={(e) => SetName(e.target.value)}
+                            name="etat"
+                            onChange={(e) => SetEtas(e.target.value)}
                             className="input-box"
-                          />
+                          >
+                            <option value="EN coure">EN coure</option>
+                            <option value="Termine">Termine</option>
+                            </select>
                         </div>
                       </div>
                     </div>
@@ -84,7 +87,6 @@ useEffect(()=>{
                         <button
                           type="submit"
                           className="py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium"
-                          // onClick={handleSubmit}
                         >
                           save changes
                         </button>

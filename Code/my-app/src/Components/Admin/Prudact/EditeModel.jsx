@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import { useMutation ,useQuery} from "@apollo/client";
+import React, { useState, useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/client";
 import { Edite_Produit } from "../../../Api/Mutation/MutationProduct";
 import { FIND_ALL_CATGORIE } from "../../../Api/Query/Query";
 
@@ -7,37 +7,54 @@ const EditeModel = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [Products, SetProducts] = useState("");
   const [updateProduct] = useMutation(Edite_Produit);
-  useEffect(()=>{
-    SetProducts (props.Products.name)
-    console.log(props.Products)
-    
-  },[props.Products])
+  useEffect(() => {
+    SetProducts(props.Products);
+    console.log(props.Products.categorie.id);
+  }, [props.Products]);
   const { loading, data, error } = useQuery(FIND_ALL_CATGORIE);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
 
-
-const handleChange = (e) => {
-  SetProducts({
-    ...Products,
-    [e.target.name]: e.target.value,
-  });
-};
+  const handleChange = (e) => {
+    SetProducts({
+      ...Products,
+      [e.target.name]: e.target.value,
+    });
+  };
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
       const { description, name, prix, stock, categorieId } = Products;
-
-      updateProduct({
-        variables: { updateProductId: props.Products.id, input: {
-          description: description,
-          images: "Image",
-          name: name,
-          prix: parseFloat(prix),
-          stock: parseInt(stock),
-          categorieId: parseInt(categorieId),
-        },},
-      });
+      if (!categorieId) {
+        updateProduct({
+          variables: {
+            updateProductId: props.Products.id,
+            input: {
+              description: description,
+              images: "RR",
+              name: name,
+              prix: parseFloat(prix),
+              stock: parseInt(stock),
+              categorieId: parseInt(Products.categorie.id),
+            },
+          },
+        });
+      } else {
+        updateProduct({
+          variables: {
+            updateProductId: props.Products.id,
+            input: {
+              description: description,
+              images: "RR",
+              name: name,
+              prix: parseFloat(prix),
+              stock: parseInt(stock),
+              categorieId: parseInt(categorieId),
+            },
+          },
+        });
+      }
+      SetProducts("");
       setShowModal(false);
     } catch (e) {
       console.log(e);
@@ -57,8 +74,8 @@ const handleChange = (e) => {
           fill="currentColor"
           viewBox="0 0 20 20"
         >
-        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                          </svg>
+          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+        </svg>
       </button>
       {showModal ? (
         <>
@@ -77,7 +94,7 @@ const handleChange = (e) => {
                   </button>
                 </div>
                 <form onSubmit={handleSubmit}>
-                <div className="col-span-9 shadow rounded px-6 pt-5 pb-7">
+                  <div className="col-span-9 shadow rounded px-6 pt-5 pb-7">
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div>
@@ -85,7 +102,8 @@ const handleChange = (e) => {
                           <input
                             type="text"
                             name="name"
-                            onChange={handleChange}
+                            value={Products.name}
+                            onChange={(e) => handleChange(e)}
                             className="input-box"
                           />
                         </div>
@@ -112,6 +130,7 @@ const handleChange = (e) => {
                           <input
                             type="text"
                             name="prix"
+                            value={Products.prix}
                             onChange={handleChange}
                             className="input-box"
                           />
@@ -122,6 +141,7 @@ const handleChange = (e) => {
                           <input
                             type="text"
                             name="stock"
+                            value={Products.stock}
                             onChange={handleChange}
                             className="input-box"
                           />
@@ -140,7 +160,9 @@ const handleChange = (e) => {
                           className="input-box"
                           rows="5"
                           cols="33"
-                        ></textarea>
+                        >
+                          {Products.description}
+                        </textarea>
                       </div>
                     </div>
 
