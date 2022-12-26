@@ -8,7 +8,7 @@ const Product = require("../../Models/productModel");
 module.exports = {
   Query: {
     Querycommande: async () => {
-      return await product_commande.findAll({
+      return await Commande.findAll({
         order: [["id", "DESC"]],
         include: user,
         raw: true,

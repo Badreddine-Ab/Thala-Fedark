@@ -6,15 +6,10 @@ const EditeModel = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [etat, SetEtas] = useState({});
   const [updateCommand, { data, error }] = useMutation(Edite_Etat);
-  useEffect(()=>{
-    SetEtas (props.Etats.etat)
-    
-  },[props.Etats])
-
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
-      console.log(etat)
+      console.log(etat);
       updateCommand({
         variables: { updateCommandId: props.Etats.id, etat: etat },
       });
@@ -70,7 +65,7 @@ const EditeModel = (props) => {
                           >
                             <option value="EN coure">EN coure</option>
                             <option value="Termine">Termine</option>
-                            </select>
+                          </select>
                         </div>
                       </div>
                     </div>
