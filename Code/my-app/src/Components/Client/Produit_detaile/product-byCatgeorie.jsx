@@ -1,20 +1,17 @@
 import { useParams } from "react-router-dom";
 import { Get_Categorie } from "../../../Api/Query/QueryFindByCtegorie";
 import { useEffect, useState } from "react";
-import addToPanel from '../button'
 
 
 
 
 export default function ProductCategorie() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [productIndex, setProductIndex] = useState(-1)
   const { loading, data, error } = Get_Categorie(useParams().id);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
 
-
-  
+  const [isLoading, setIsLoading] = useState(false)
+  const [productIndex, setProductIndex] = useState(-1)
  
 
 

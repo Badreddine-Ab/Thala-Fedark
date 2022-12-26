@@ -6,13 +6,13 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { RESET_PASSWORD } from '../../gql/mutations';
+import { LOGIN_USER } from '../../gql/mutations';
 //import { Lang, useFormInputValidation } from "react-form-input-validation";
 //import axios from "axios";
 //import Cookies from "universal-cookie";
 //const  cookies = new Cookies();
 
-export default function RESET() {
+export default function ResetPasswordForm() {
     const navigate = useNavigate()
     const [formData,setFormData]= useState({})
     const [resetPassword,{data,loading,error}] = useMutation(RESET_PASSWORD)

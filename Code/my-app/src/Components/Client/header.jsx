@@ -1,10 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import {FIND_ALL_CATGORIE} from "../../Api/Query/Query"
 
 export default function Header() {
-  const token = localStorage.getItem("token")
-  const navigate =useNavigate()
+
   const {error,data,loading } = useQuery(FIND_ALL_CATGORIE);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
@@ -53,9 +52,6 @@ export default function Header() {
               </div>
 
               <div className="flex items-center justify-between flex-grow pl-12">
-                {
-                  token ?
-                  <>
                 <div className="flex items-center space-x-6 capitalize">
                 <Link to="/">
                   <a
@@ -87,26 +83,11 @@ export default function Header() {
                   </a>
                 </div>
                 <a
-                  onClick={()=>{
-                    localStorage.removeItem("token")
-                    navigate('/login')
-                  }}
-                  className="text-gray-200 hover:text-white transition"
-
-                >
-                  Logout
-                </a>
-                </>:
-                <>
-                <div></div>
-                <a
                   href="pages/login.html"
                   className="text-gray-200 hover:text-white transition"
                 >
                   Login
                 </a>
-                </>
-                }
               </div>
             </div>
           </nav>
