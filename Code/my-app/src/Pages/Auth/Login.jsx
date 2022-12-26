@@ -99,7 +99,7 @@ export default function Login() {
                             />
                             {/* <span className='text-sm text-red-600'>{errors.password ? errors.password : ""}</span>  */}
                             <p className='p-1 px-3 -mr-3'>
-                                {/* <span className='text-yellow-300'><NavLink to="/forgot">Forgot password ?</NavLink></span> */}
+                                <span className='text-primary'><NavLink to="/forgot">Forgot password ?</NavLink></span>
 
                             </p>
                         </div>
