@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-export default function component_card(props) {
+export default function Component_card(props) {
 
     let cart = JSON.parse(localStorage.getItem("cartProducts"));
 

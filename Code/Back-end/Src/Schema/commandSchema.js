@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 module.exports = gql`
   type Commande {
@@ -11,41 +11,40 @@ module.exports = gql`
     user: User
     product: ID
   }
-  type Product {
-    id: ID
-    name: String
-    description: String!
-    prix: Float!
-    stock: Int!
-    ventes: Int
-    ventes_promo: Int
-    images: [String]
-    categorie: Categorie
-  }
-  type product_commande {
-    id: ID
-    product: Product
-    commande: Commande
-  }
+#   type Product {
+#     id: ID
+#     name: String
+#     description: String!
+#     prix: Float!
+#     stock: Int!
+#     ventes: Int
+#     ventes_promo: Int
+#     images: [String]
+#     categorie: Categorie
+#   }
+#   type product_commande {
+#     id: ID
+#     product: Product
+#     Commande: Commande
+#   }
 
   type Query {
-    Querycommande: [product_commande]
+    Querycommande: [Commande]
     StatistiqueAchats(StartDate: String!, EndDate: String!): Int
   }
 
   type Mutation {
-    AddCommand(quantite: Int! idUser: ID! product: ID!): Boolean
+    AddCommand(
+      prixTotal: Float!
+      quantite: Int!
+      idUser: ID!
+      product: ID!
+    ): Boolean
     updateCommand(id: ID!, etat: String!): Boolean
     deleteCommande(id: ID!): Boolean
   }
 
- type Mutation{
-    AddCommand(prixTotal:Float!,quantite:Int!,idUser:ID!): Commande
-    updateCommand(id:ID!,etat:String!): Boolean
-    deleteCommande(id:ID!): Boolean
- }
-
- type Subscription{
-   Selectcommande:[Commande]
- }
- `
+  type Subscription {
+    Selectcommande: [Commande]
+  }
+`;
