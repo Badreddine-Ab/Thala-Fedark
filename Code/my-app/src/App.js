@@ -7,7 +7,7 @@ import SearchbyName from './Pages/Client/GetProduitByName'
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
 import FORGOT_PASSWORD from "./Pages/Auth/ForgotPaasword";
-import RESET_PASSWORD from "./Pages/Auth/ResetPassword";
+import RESET_PASSWORD from "./Pages/Auth/resetPassword";
 import PageNotfound from './Pages/404.jsx'
 import Upload from './Components/Client/upload'
 import Produit from './Pages/Admin/produit'
