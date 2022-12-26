@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express");
+const { gql } = require('apollo-server-express');
 
 module.exports = gql`
   type Commande {
@@ -39,7 +39,13 @@ module.exports = gql`
     deleteCommande(id: ID!): Boolean
   }
 
-  type Subscription {
-    Selectcommande: [Commande]
-  }
-`;
+ type Mutation{
+    AddCommand(prixTotal:Float!,quantite:Int!,idUser:ID!): Commande
+    updateCommand(id:ID!,etat:String!): Boolean
+    deleteCommande(id:ID!): Boolean
+ }
+
+ type Subscription{
+   Selectcommande:[Commande]
+ }
+ `

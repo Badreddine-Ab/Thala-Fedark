@@ -6,13 +6,13 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { RESET_PASSWORD } from '../../gql/mutations';
+import { LOGIN_USER } from '../../gql/mutations';
 //import { Lang, useFormInputValidation } from "react-form-input-validation";
 //import axios from "axios";
 //import Cookies from "universal-cookie";
 //const  cookies = new Cookies();
 
-export default function RESET() {
+export default function ResetPasswordForm() {
     const navigate = useNavigate()
     const [formData,setFormData]= useState({})
     const [resetPassword,{data,loading,error}] = useMutation(RESET_PASSWORD)
@@ -93,10 +93,10 @@ export default function RESET() {
 
                         <div className='flex flex-col'>
                             <button type='submit' className='block w-full px-7 py-3 rounded-xl bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-500 active:bg-yellow-500'>
-                                <span className='text-lg text-white'>forgot</span>
+                                <span className='text-lg text-white'>Recover password</span>
                             </button>
                             <p className='p-1 text-center'>
-                                <span className='text-yellow-300'><NavLink to="/register">Create new account</NavLink></span>
+                                <span className='text-yellow-300'><NavLink to="/login">Back to login</NavLink></span>
                             </p>
                         </div>
 

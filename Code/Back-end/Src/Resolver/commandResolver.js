@@ -2,8 +2,6 @@ const { ApolloServer } = require("apollo-server-express");
 const { where, Op } = require("sequelize");
 const Commande = require("../../Models/commandeModel");
 const user = require("../../Models/userModel");
-const product_commande = require("../../Models/produitCommandeModel");
-const Product = require("../../Models/productModel");
 
 module.exports = {
   Query: {
@@ -20,13 +18,9 @@ module.exports = {
     },
     StatistiqueAchats: async (_, args) => {
       let { StartDate, EndDate } = args;
-      if (!StartDate || !EndDate)
-        throw new Error("Please remplire tous les Date");
-      if (StartDate > EndDate)
-        throw new Error("The end date cannot be earlier than the start date");
-      return await Commande.count({
-        where: { createdAt: { [Op.between]: [StartDate, EndDate] } },
-      });
+      if (!StartDate || !EndDate) throw new Error("Please remplire tous les Date");
+      if (StartDate > EndDate) throw new Error("The end date cannot be earlier than the start date");
+      return await Commande.count({ where: { createdAt: { [Op.between]: [StartDate, EndDate]}}});
     },
   },
 
@@ -45,15 +39,6 @@ module.exports = {
           etat: "en attend",
           userId: idUser,
         });
-        await product_commande.create({
-          productId: product,
-          commandeId: Commandes.id,
-        });
-        if (Commandes) {
-          await Product.update({stock: products.stock - quantite},{ where: { id: product }});
-        }
-
-        return true;
       } catch (error) {
         throw error;
       }
@@ -87,6 +72,8 @@ module.exports = {
         raw: true,
         nest: true,
       });
-    },
+   
+    
   },
+  }
 };

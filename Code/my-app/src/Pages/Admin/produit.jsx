@@ -109,46 +109,20 @@ export default function Produit() {
         {<!-- wishlist --> */}
         <div className="col-span-9 space-y-4">
             <div className="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
-                <div className="">
-                <h2 className="text-gray-800 text-xl font-medium uppercase">Img</h2>
-                </div>
-                <div className="">
-                    <h2 className="text-gray-800 text-xl font-medium uppercase">Nome De Produit</h2>
-                </div>
-                <div className="">
-                    <h2 className="text-gray-800 text-xl font-medium uppercase">prix</h2>
-                </div>
-                <div className="">
-                    <h2 className="text-gray-800 text-xl font-medium uppercase">Promotion</h2>
-                </div>
-                <div className="">
-                    <h2 className="text-gray-800 text-xl font-medium uppercase">stock</h2>
-                </div>
-                
-
-                <div className="text-gray-600 cursor-pointer hover:text-primary">
-                    {/* <i className="fa-solid fa-trash"></i> */}
-                </div>
-            </div>
-
-            <div className="flex items-center justify-between border border-gray-200 rounded">
                 <div className="w-28">
                     <img src={image} alt="product 6" className="w-full" />
                 </div>
-                <div className="1/3">
+                <div className="w-1/3">
                     <h2 className="text-gray-800 text-xl font-medium uppercase">Italian L shape</h2>
                     <p className="text-gray-500 text-sm">YUSOKI Luxury Double Sided </p>
                 </div>
-                <div className="1/3">
-                    <p className="text-gray-500 text-sm">120$  </p>
+                <div className="w-1/3">
+                    <h2 className="text-gray-800 text-xl font-medium uppercase">Promotion :</h2>
+                    <p className="text-gray-500 text-sm">120$  <span className="text-red-600 bg-red-100 rounded-xl">-12%</span></p>
                 </div>
-                <span className="text-red-600 bg-red-100 rounded-xl">-12%</span>
-                <div className="">
-                    <p className="text-gray-500 text-sm">2000  </p>
-                </div>
-                {/* <a href="#"
+                <a href="#"
                     className="px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">update
-                    </a> */}
+                    </a>
 
                 <div className="text-gray-600 cursor-pointer hover:text-primary">
                     {/* <i className="fa-solid fa-trash"></i> */}

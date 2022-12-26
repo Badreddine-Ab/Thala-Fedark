@@ -28,10 +28,10 @@ input ProductInput {
   description: String!
   prix: Float!
   stock: Int!
-  ventes: Int
-  ventes_promo: Int
+  ventes: Int!
+  ventes_promo: Int!
   images: [Upload]
-  categorieId: ID
+  categorieId: ID!
 }
 
 input UpdateProductStockInput {
@@ -42,6 +42,10 @@ input UpdateProductStockInput {
 type UpdateProductStockPayload {
   product: Product
 }
+
+type Subscription {
+    productDeleted: Product
+  }
 
 extend type Query{
     categories: [Categorie]
@@ -55,10 +59,16 @@ extend type Mutation{
     addCategorie(name:String!) : Categorie
     deleteCategorie(id:ID) : Boolean
     updateCategorie(id: ID!, name: String!): Categorie
-    createProduct(input: ProductInput): Product
+    createProduct(input: ProductInput!): Product!
     updateProduct(id: ID!, input: ProductInput!): Product!
-    deleteProduct(id: ID!): Product!
+    deleteProduct(id: ID!): DeleteProductResponse
     updateProductStock(input: UpdateProductStockInput!): UpdateProductStockPayload
 
 }
+
+type DeleteProductResponse {
+    product: Product
+    error: String
+  }
+  
 `

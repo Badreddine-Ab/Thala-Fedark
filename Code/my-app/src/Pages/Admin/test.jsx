@@ -1,13 +1,10 @@
-import TableComponents from '../../Components/Admin/Command/TableComponents'
-import DashboaedLayout from '../../Components/Admin/DashboaedLayout'
+import TableComponents from '../../Components/Admin/TableComponents'
 
 export default function Test() {
   return (
     <>
-<DashboaedLayout>
-<TableComponents  type="image" />
 
-</DashboaedLayout>
+<TableComponents  type="image" />
          
     </>
      )
