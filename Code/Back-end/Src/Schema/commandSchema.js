@@ -11,25 +11,26 @@ module.exports = gql`
     user: User
     product: ID
   }
-#   type Product {
-#     id: ID
-#     name: String
-#     description: String!
-#     prix: Float!
-#     stock: Int!
-#     ventes: Int
-#     ventes_promo: Int
-#     images: [String]
-#     categorie: Categorie
-#   }
-#   type product_commande {
-#     id: ID
-#     product: Product
-#     Commande: Commande
-#   }
+  type Product {
+    id: ID
+    name: String
+    description: String!
+    prix: Float!
+    stock: Int!
+    ventes: Int
+    ventes_promo: Int
+    images: [String]
+    categorie: Categorie
+  }
+  type product_commande {
+    id: ID
+    product: Product
+    Commande: Commande
+  }
 
   type Query {
     Querycommande: [Commande]
+    Countcommande: Int
     StatistiqueAchats(StartDate: String!, EndDate: String!): Int
   }
 

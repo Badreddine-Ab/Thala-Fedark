@@ -43,3 +43,9 @@ export const FIND_ALL_Commande = gql`
     }
   }
 `;
+
+export const CountCommande = gql`
+ query Query {
+  Countcommande
+}
+`;

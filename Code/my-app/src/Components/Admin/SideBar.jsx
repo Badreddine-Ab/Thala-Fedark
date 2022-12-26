@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Profile from "../../images/Profile.JPG";
-import image from "../../images/products/product6.jpg";
-import { FaCog, FaHome, FaUser } from "react-icons/fa";
+import { useQuery } from "@apollo/client";
+import{CountCommande} from '../../Api/Query/Query'
 
 export default function Sidebar() {
+
+  const {error,data,loading}=useQuery(CountCommande)
+ 
+if(loading) return<>loading...</>
+if(error) return <>Error:{error}</>
+
   return (
     <div className="max-h-full">
       <aside className="w-64" aria-label="Sidebar">
@@ -45,7 +50,7 @@ export default function Sidebar() {
                 </svg>
                 <span className="flex-1 ml-3 whitespace-nowrap">Commend</span>
                 <span className="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">
-                  3
+                  {data.Countcommande}
                 </span>
               </Link>
             </li>
