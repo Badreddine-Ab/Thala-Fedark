@@ -5,6 +5,8 @@ import GetCategory from './Pages/Client/GetProduitByCategory'
 import SearchbyName from './Pages/Client/GetProduitByName'
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
+import FORGOT_PASSWORD from "./Pages/Auth/ForgotPaasword";
+import RESET_PASSWORD from "./Pages/Auth/ResetPassword";
 import PageNotfound from './Pages/404.jsx'
 import Upload from './Components/Client/upload'
 import Produit from './Pages/Admin/produit'
@@ -16,6 +18,7 @@ import Categorie from "./Pages/Admin/Categorie"
 import Cart from './Pages/Client/Cart';
 
 
+
 function App() {
   return (
       <BrowserRouter>
@@ -25,6 +28,8 @@ function App() {
           <Route path="search/:id" element={<SearchbyName />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register/>}/>
+          <Route path="/forgot" element={<FORGOT_PASSWORD/>}/>
+          <Route path="/reset:id" element={<RESET_PASSWORD/>}/>
           <Route path="*" element={<PageNotfound/>}/>
           <Route path="/up" element={<Upload/>}/>
           <Route path="/produit" element={<Produit/>}/>
