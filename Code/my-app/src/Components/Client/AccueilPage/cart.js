@@ -115,7 +115,6 @@ export default function Card() {
                 </div>
             </>
         )
-
     }
     else {
         return (

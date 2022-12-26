@@ -6,10 +6,14 @@ const models = require('./Models/index')
 const apiError = require('./Utils/ErrorUtils')
 const globalError = require('./Middlewares/errorMiddleware')
 const { ApolloServer } = require('apollo-server-express')
+// const { resolvers } = require('./Schemas/CategorieSchema')
+// const { resolverCommand  } = require('./Schemas/CommandShema')
+// const { typeDefs  } = require('./Routes/Root')
 const schema = require('./src/schema/index')
 const resolvers = require('./Src/Resolver/index')
 const { PubSub } = require("graphql-subscriptions")
 const pubsub = new PubSub();
+
 
 console.log(process.env.host)
 
