@@ -1,12 +1,12 @@
 const { Sequelize } = require('sequelize');
 
-const db =new Sequelize(process.env.DATABASE, process.env.DB_USER, process.env.password, {
+const db = new Sequelize(process.env.DATABASE, process.env.DB_USER, process.env.password, {
     host: process.env.host,
     dialect: 'postgres'
-  });
+});
 
 
-const connectDb = async ()=>{
+const connectDb = async () => {
     try {
         await db.authenticate()
         await db.sync()
@@ -16,4 +16,4 @@ const connectDb = async ()=>{
     }
 }
 
-module.exports = {connectDb,db}
+module.exports = { connectDb, db }

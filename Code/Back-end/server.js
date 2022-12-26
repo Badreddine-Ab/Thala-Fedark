@@ -8,7 +8,7 @@ const globalError = require('./Middlewares/errorMiddleware')
 const { ApolloServer } = require('apollo-server-express')
 const schema = require('./src/schema/index')
 const resolvers = require('./Src/Resolver/index')
-const {PubSub} = require("graphql-subscriptions")
+const { PubSub } = require("graphql-subscriptions")
 const pubsub = new PubSub();
 
 console.log(process.env.host)
@@ -39,9 +39,11 @@ app.get('/', (req, res) => {
 // app.use(errRoute)
 
 const StartAppoloServer = async () => {
-    const server = new ApolloServer({typeDefs: schema, resolvers,context: ({ req, res }) => ({ req, res, pubsub }), schemaDirectives: {
-        connection: connectionDefinitions,
-      }})
+    const server = new ApolloServer({
+        typeDefs: schema, resolvers, context: ({ req, res }) => ({ req, res, pubsub }), schemaDirectives: {
+            connection: connectionDefinitions,
+        }
+    })
     await server.start()
     server.applyMiddleware({ app, path: "/graphql" })
     console.log(`apollo server is running at http://localhost:${port}${server.graphqlPath}`)
