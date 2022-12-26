@@ -28,16 +28,24 @@ export const FIND_ALL_CATGORIE = gql`
 `;
 
 export const FIND_ALL_Commande = gql`
-  query Querycommande {
-    Querycommande {
+ query Query {
+  Querycommande {
+    commande {
       etat
-      prixTotal
       id
+      prixTotal
       quantite
       user {
         name
-        email
       }
     }
+    id
+    product {
+      name
+      id
+      prix
+      stock
+    }
   }
+}
 `;

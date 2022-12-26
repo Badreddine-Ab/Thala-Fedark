@@ -33,7 +33,9 @@ export default function TableComponents() {
                 <th className="px-4 py-3" hidden>
                   Id
                 </th>
-                <th className="px-4 py-3"></th>
+                {/* <th className="px-4 py-3"></th> */}
+                <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">Name Prudact</th>
                 <th className="px-4 py-3">Prix</th>
                 <th className="px-4 py-3">Quantite</th>
                 <th className="px-4 py-3">TotalPrix</th>
@@ -64,30 +66,31 @@ export default function TableComponents() {
                           ></div>
                         </div>
                         <div>
-                          <p className="font-semibold">Hans Burger</p>
-                          <p className="text-xs text-gray-600 dark:text-gray-400">
-                            10x Developer
-                          </p>
+                          <p className="font-semibold">{command.commande.user.name}</p>
+                         
                         </div>
                       </div>
                     </td>
-
                     <td className="px-4 py-3 text-sm">
-                      {command.prixTotal} Dh
+                      {command.product.name} 
                     </td>
-
-                    <td className="px-4 py-3 text-sm">{command.quantite}</td>
                     <td className="px-4 py-3 text-sm">
-                      {command.quantite * command.prixTotal} DH
+                      {command.product.prix} Dh
+                    </td>
+                    
+
+                    <td className="px-4 py-3 text-sm">{command.commande.quantite}</td>
+                    <td className="px-4 py-3 text-sm">
+                      {command.commande.prixTotal} DH
                     </td>
                     <td className="px-4 py-3 text-xs">
                       <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                        {command.etat}
+                        {command.commande.etat}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-4 text-sm">
-                        <button onClick={() => SetEtat({id:command.id,etat:command.etat})}>
+                        <button onClick={() => SetEtat({id:command.commande.id,etat:command.commande.etat})}>
                           <EditeModel Etats={Etat} />
                         </button>
 

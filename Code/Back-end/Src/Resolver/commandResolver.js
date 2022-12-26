@@ -8,9 +8,12 @@ const Product = require("../../Models/productModel");
 module.exports = {
   Query: {
     Querycommande: async () => {
-      return await Commande.findAll({
+      return await product_commande.findAll({
         order: [["id", "DESC"]],
-        include:user ,
+        include:[
+          {model: Product ,required: true},
+          {model: Commande,required: true,include:user}
+        ],
         raw: true,
         nest: true,
       });
@@ -30,14 +33,14 @@ module.exports = {
   Mutation: {
     AddCommand: async (_, args) => {
       try {
-        const { prixTotal, quantite, idUser, product } = args;
+        const {quantite, idUser, product } = args;
         const products = await Product.findByPk(product);
-        if (!prixTotal || !quantite || !idUser)
+        if ( !quantite || !idUser)
           throw new Error("Please remplire tous les champs");
         if (products.stock < quantite) throw new Error("greater quantity!");
 
         const Commandes = await Commande.create({
-          prixTotal: prixTotal,
+          prixTotal: quantite*products.prix,
           quantite: quantite,
           etat: "en attend",
           userId: idUser,

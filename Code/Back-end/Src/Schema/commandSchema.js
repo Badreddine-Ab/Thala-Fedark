@@ -11,35 +11,30 @@ module.exports = gql`
     user: User
     product: ID
   }
-#   type Product {
-#     id: ID
-#     name: String
-#     description: String!
-#     prix: Float!
-#     stock: Int!
-#     ventes: Int
-#     ventes_promo: Int
-#     images: [String]
-#     categorie: Categorie
-#   }
-#   type product_commande {
-#     id: ID
-#     product: Product
-#     Commande: Commande
-#   }
+  type Product {
+    id: ID
+    name: String
+    description: String!
+    prix: Float!
+    stock: Int!
+    ventes: Int
+    ventes_promo: Int
+    images: [String]
+    categorie: Categorie
+  }
+  type product_commande {
+    id: ID
+    product: Product
+    commande: Commande
+  }
 
   type Query {
-    Querycommande: [Commande]
+    Querycommande: [product_commande]
     StatistiqueAchats(StartDate: String!, EndDate: String!): Int
   }
 
   type Mutation {
-    AddCommand(
-      prixTotal: Float!
-      quantite: Int!
-      idUser: ID!
-      product: ID!
-    ): Boolean
+    AddCommand(quantite: Int! idUser: ID! product: ID!): Boolean
     updateCommand(id: ID!, etat: String!): Boolean
     deleteCommande(id: ID!): Boolean
   }
