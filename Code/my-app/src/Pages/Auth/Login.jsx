@@ -15,7 +15,7 @@ import { LOGIN_USER } from '../../gql/mutations';
 export default function Login() {
     const navigate = useNavigate()
     const [formData,setFormData]= useState({})
-    const [login,{data,loading,error}] = useMutation(LOGIN_USER)
+    const [loginUser,{error,loading,data}] = useMutation(LOGIN_USER)
 
     if (loading) return <h1>Loading...</h1>
     if (data){
@@ -31,11 +31,10 @@ export default function Login() {
     }
 
     const handleSubmit = (e)=>{
-        const {email,password}=formData
         e.preventDefault()
-        login({
+        loginUser({
             variables:{
-                email: email, password: password
+                userLogin:formData
             }
         })
         
@@ -43,19 +42,12 @@ export default function Login() {
     }
 
     return (
-        <div className='grid grid-cols-1  h-screen w-full'>
-            
+        <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
+            <div className='hidden sm:block'>
+                {/* <img className='w-full h-full ' src={LoginImg} alt='Login img' /> */}
+            </div>
             <div className='bg-neutral-50 flex flex-col justify-center'>
                 <div className='max-w-[460px] w-full mx-auto bg-white p-5 px-8 rounded-lg shadow-lg'>
-                    {
-                        error &&
-                        <div className='bg-red-50 text-red-400 text-center text-lg rounded-xl transition '>{error.message}</div>
-                    }
-
-                    {
-                        data && data.user &&
-                        <div className='green'>{data.user.name} is SignedUp. You can login now!</div>
-                    }
                     <div className='space-y-2'>
                         <a href="">
                             {/* <img src={Logo} className='w-40' alt="" /> */}
@@ -63,9 +55,25 @@ export default function Login() {
                         <p className='text-lg text-gray-600'>Hey welcome back 👋 Login first</p>
                     </div>
 
-                    
+                    <div className='mt-6 grid gap-6 sm:grid-cols-2'>
+                        <button className='py-3 px-6 bg-yellow-50 rounded-xl transition '>
+                            <span className='flex justify-center gap-4'>
+                                {/* <img className='w-5' src={Google} alt="google logo" /> */}
+                                <span className='text-sm tracking-wide font-semibold text-yellow-300'>With Google</span>
+                            </span>
+                        </button>
 
-                    
+                        <button className='py-3 px-6 bg-blue-50 rounded-xl transition '>
+                            <span className='flex justify-center gap-4'>
+                                {/* <img className='w-5' src={Facebook} alt="google logo" /> */}
+                                <span className='text-sm tracking-wide font-semibold text-blue-500'>With Facebook</span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div className='mt-7 border-t'>
+                        <span className='block w-max mx-auto -mt-3 px-4 text-gray-500 bg-white'>Or</span>
+                    </div>
 
                     <form noValidate autoComplete="off" onSubmit={handleSubmit} className='pt-4 space-y-6'>
                         <div>
@@ -97,12 +105,11 @@ export default function Login() {
                         </div>
 
                         <div className='flex flex-col'>
-                            <button type='submit' className='bg-primary border border-primary text-white px-8 py-3 font-medium 
-                    rounded-md '>
+                            <button type='submit' className='block w-full px-7 py-3 rounded-xl bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-500 active:bg-yellow-500'>
                                 <span className='text-lg text-white'>Login</span>
                             </button>
                             <p className='p-1 text-center'>
-                                <span className='text-primary'><NavLink to="/register">Create new account</NavLink></span>
+                                <span className='text-yellow-300'><NavLink to="/register">Create new account</NavLink></span>
                             </p>
                         </div>
                     </form>

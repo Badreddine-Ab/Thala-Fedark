@@ -1,160 +1,58 @@
-import { useState, useRef, useEffect } from "react";
-import { useMutation, ApolloError } from "@apollo/client";
-import { Add_Command } from "../../../Api/Mutation/MutationCommand";
+import {useState} from 'react'
 
-export default function AddCommand() {
- 
-  const [AddCommand,{data,error}] = useMutation(Add_Command);
-  const [command, SetCommand] = useState({
-    prixTotal: 0,
-    quantite: 0,
-    idUser: 0,
-  });
+export default function addCommand() {
+    const [command,SetCommand]=useState({})
+    function handleInput(e){
+SetCommand({
+    ...command,
+    [e.target.name]: e.target.value,
 
-
-
-
-  // useEffect(() => {
-  //   if (error) {
-  //     console.error(error);
-  //   } else {
-  //     console.log(data);
-  //   }
-  // }, [data, error]);
-
- 
-
-  const idUser = useRef();
-  const prix = useRef();
-  const quantite = useRef();
-  // console.log(prix.current.value)
-  // console.log(idUser.current.value)
-  // console.log(quantite.current.value)
-  // console.log(AddCommand );
-
-  // function onchange(e) {
-  //   SetCommand(() => ({
-  //     ...command,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  //   console.log(command);
-  // }
-
-  const onchange = (e) => {
-    SetCommand(() => ({
-      ...command,
-      [e.target.name]: e.target.value,
-    }));  
-        console.log(command);
- 
-  };
-
-  function handleSubmit(e) {
-    try {
-      const { prixTotal, quantite, idUser } = command;
-
-      e.preventDefault()
-      AddCommand({
-        variables: { prixTotal:prixTotal, quantite:quantite, idUser:idUser},
-      }).then(res=>{
-        console.log(data)
-      })
-      // console.log(command);
-    } catch (e) {
-      console.log(e);
+})
     }
-  }
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className="col-span-9 shadow rounded px-6 pt-5 pb-7">
-          <h4 className="text-lg font-medium capitalize mb-4">
-            Profile information
-          </h4>
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label for="first">Prix Total</label>
-                <input
-                  type="text"
-                  name="prixTotal"
-                  value={command.prixTotal}
-                  className="input-box"
-                  ref={prix}
-                 onChange={onchange}
-
-                />
-              </div>
-              <div>
-                <label for="last">Quantite</label>
-                <input
-                  type="text"
-                  name="quantite"
-                  ref={quantite}
-                //  onChange={(e) => SetQuantite(e.target.value)}
-
-
-                  // value={command.quantite}
-                  onChange={onchange}
-                  className="input-box"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label for="birthday">id user</label>
-                <input
-                  type="text"
-                  name="idUser"
-                  className="input-box"
-                  value={command.idUser}
-                  ref={idUser}
-                //  onChange={(e) => SetIdUser(e.target.value)}
-
-                  onChange={onchange}
-                />
-              </div>
-              {/* <div>
-              <label for="gender">Gender</label>
-              <select name="gender" id="gender" className="input-box">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div> */}
-            </div>
-            {/* <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label for="email">Email Address</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="input-box"
-              />
-            </div>
-            <div>
-              <label for="phone">Phone number</label>
-              <input
-                type="text"
-                name="phone"
-                id="phone"
-                className="input-box"
-              />
-            </div>
-          </div> */}
-          </div>
-
-          <div className="mt-4">
-            <button
-              type="submit"
-              className="py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium"
-             
+    <div>
+         <div
+              className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
             >
-              save changes
-            </button>
-          </div>
-        </div>
-      </form>
-    </>
-  );
+              <label className="block text-sm">
+                <span className="text-gray-700 dark:text-gray-400">
+                  Invalid input
+                </span>
+                <input
+                  className="block w-full mt-1 text-sm border-red-600 dark:text-gray-300 dark:bg-gray-700 focus:border-red-400 focus:outline-none focus:shadow-outline-red form-input"
+                  placeholder="Jane Doe"
+                />
+                <span className="text-xs text-red-600 dark:text-red-400">
+                  Your password is too short.
+                </span>
+              </label>
+
+              <label className="block mt-4 text-sm">
+                <span className="text-gray-700 dark:text-gray-400">
+                  Valid input
+                </span>
+                <input
+                  className="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input"
+                  placeholder="Jane Doe"
+                />
+                <span className="text-xs text-green-600 dark:text-green-400">
+                  Your password is strong.
+                </span>
+              </label>
+
+              <label className="block mt-4 text-sm">
+                <span className="text-gray-700 dark:text-gray-400">
+                  Helper text
+                </span>
+                <input
+                  className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                  placeholder="Jane Doe"
+                />
+                <span className="text-xs text-gray-600 dark:text-gray-400">
+                  Your password must be at least 6 characters long.
+                </span>
+              </label>
+            </div>
+    </div>
+  )
 }
