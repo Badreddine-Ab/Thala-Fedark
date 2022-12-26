@@ -12,3 +12,9 @@ mutation AddCommand($prixTotal: Float!, $quantite: Int!, $idUser: ID!) {
   }
 }
 `;
+
+export const Edite_Etat = gql`
+mutation Mutation($updateCommandId: ID!, $etat: String!) {
+  updateCommand(id: $updateCommandId, etat: $etat)
+}
+`;
