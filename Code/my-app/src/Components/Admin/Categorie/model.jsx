@@ -60,10 +60,6 @@ const Modal = (props) => {
                             className="input-box"
                           />
                         </div>
-                        
-                     
-                        
-                       
                       </div>
                       
                     </div>
@@ -79,9 +75,7 @@ const Modal = (props) => {
                         </button>
                         <button
                           type="submit"
-                          className="py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium"
-                          // onClick={handleSubmit}
-                          
+                          className="py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium"                          
                         >
                           save changes
                         </button>
