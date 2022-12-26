@@ -1,11 +1,11 @@
-import TableComponents from '../../Components/Admin/Command/TableComponents'
+import Table from '../../Components/Admin/Prudact/Table'
 import DashboaedLayout from '../../Components/Admin/DashboaedLayout'
 
-export default function Test() {
+export default function Product() {
   return (
     <>
 <DashboaedLayout>
-<TableComponents  type="image" />
+<Table/>
 
 </DashboaedLayout>
          
