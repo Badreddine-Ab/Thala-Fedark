@@ -10,7 +10,7 @@ module.exports = {
     Querycommande: async () => {
       return await Commande.findAll({
         order: [["id", "DESC"]],
-        include: user,
+        include:user ,
         raw: true,
         nest: true,
       });
