@@ -12,7 +12,7 @@ import { REGISTER_USER } from '../../gql/mutations';
 
 export default function Register() {
     const [formData,setFormData]= useState({})
-    const [registerUser,{data,loading,error}] = useMutation(REGISTER_USER)
+    const [Signup,{data,loading,error}] = useMutation(REGISTER_USER)
 
     if(loading) return <h1>Loading...</h1>
     
@@ -24,19 +24,18 @@ export default function Register() {
     }
 
     const handleSubmit = (e)=>{
+        const {name,email,password}=formData
         e.preventDefault()
-        registerUser({
+        Signup({
             variables:{
-                userNew:formData
+                name: name, email: email, password: password, role: "client"
             }
         })
     }
         return (
 
-            <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
-                <div className='hidden sm:block'>
-                    {/* <img className='w-full h-full ' src={LoginImg} alt='Login img' /> */}
-                </div>
+            <div className='grid grid-cols-1  h-screen w-full'>
+                
                 <div className='bg-neutral-50 flex flex-col justify-center'>
                     <div className='max-w-[460px] w-full mx-auto bg-white p-5 px-8 rounded-lg shadow-lg'>
                     
@@ -57,25 +56,9 @@ export default function Register() {
                             <p className='text-lg text-gray-600'>Welcome to Marhaba ! It's quick and easy 💛</p>
                         </div>
 
-                        <div className='mt-3 grid gap-3 sm:grid-cols-2'>
-                            <button className='py-3 px-6 bg-yellow-50 rounded-xl transition '>
-                                <span className='flex justify-center gap-4'>
-                                    {/* <img className='w-5' src={Google} alt="google logo" /> */}
-                                    <span className='text-sm tracking-wide font-semibold text-yellow-300'>With Google</span>
-                                </span>
-                            </button>
+                        
 
-                            <button className='py-3 px-6 bg-blue-50 rounded-xl transition '>
-                                <span className='flex justify-center gap-4'>
-                                    {/* <img className='w-5' src={Facebook} alt="google logo" /> */}
-                                    <span className='text-sm tracking-wide font-semibold text-blue-500'>With Facebook</span>
-                                </span>
-                            </button>
-                        </div>
-
-                        <div className='mt-4 border-t'>
-                            <span className='block w-max mx-auto -mt-3 px-4 text-gray-500 bg-white'>Or</span>
-                        </div>
+                        
 
                         <form noValidate autoComplete="off" onSubmit={handleSubmit} className='pt-1 space-y-4'>
                             <div>
@@ -131,11 +114,12 @@ export default function Register() {
                                 {/* <span className='text-sm text-red-600'>{errors.password_confirmation ? errors.password_confirmation : ""}</span>  */}
                             </div>
                             <div className='flex flex-col'>
-                                <button type='submit' className='block w-full px-7 py-3 rounded-xl bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-500 active:bg-yellow-500'>
+                                <button type='submit' className='bg-primary border border-primary text-white px-8 py-3 font-medium 
+                    rounded-md'>
                                     <span className='text-lg text-white'>Register</span>
                                 </button>
                                 <p className='p-1 text-center'>
-                                    <span className='text-yellow-300'><NavLink to="/login">Already have an account ?</NavLink></span>
+                                    <span className='text-primary'><NavLink to="/login">Already have an account ?</NavLink></span>
                                 </p>
                             </div>
                         </form>
