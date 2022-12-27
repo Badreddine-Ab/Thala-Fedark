@@ -23,7 +23,7 @@ export default function Table() {
     console.log("click me");
   };
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>something went wrong...</div>;
+  if (error) return <div><p className="bg-red">wrong...{error.message}</p> </div>;
 
   return (
     <>

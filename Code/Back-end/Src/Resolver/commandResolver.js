@@ -1,4 +1,5 @@
 const { ApolloServer } = require("apollo-server-express");
+
 const { where, Op } = require("sequelize");
 const Commande = require("../../Models/commandeModel");
 const user = require("../../Models/userModel");
@@ -65,6 +66,7 @@ module.exports = {
     deleteCommande: async (_, args) => {
       try {
         if (await Commande.destroy({ where: args })) return true;
+
         else return false;
       } catch (e) {
         throw e;
@@ -73,13 +75,8 @@ module.exports = {
   },
 
   Subscription: {
-    Selectcommande: async () => {
-      return await Commande.findAll({
-        order: [["id", "DESC"]],
-        include: user,
-        raw: true,
-        nest: true,
-      });
-    },
-  },
+    Selectcommande: {
+
+    }
+  }
 };

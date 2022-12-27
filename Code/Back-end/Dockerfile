@@ -16,7 +16,7 @@ RUN npm install
 COPY . .
 
 #exposing the port so we can access it further
-EXPOSE 8000
+EXPOSE 9090
 
 #starting the server
 CMD ["npm run","start:dev"]

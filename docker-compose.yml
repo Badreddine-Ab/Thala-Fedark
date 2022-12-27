@@ -1,6 +1,21 @@
 version: '3.8'
 services:
-  db:
+#  front-end:
+#     build: ./my-app
+#     ports:
+#       - 3000:3000
+#     volumes:
+#       - ./my-app:/app
+#  back-end:
+#     build: ./Back-end 
+#     volumes:
+#     - /app/node_modules 
+#     - ./Back-end:/app 
+#     ports:
+#      - 9090:9090    
+#     depends_on:
+#      - db
+ db:
     container_name: pg_container
     image: postgres
     restart: always
@@ -10,7 +25,7 @@ services:
       POSTGRES_DB: thala_fdarak
     ports:
       - "5432:5432"
-  pgadmin:
+ pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4
     restart: always

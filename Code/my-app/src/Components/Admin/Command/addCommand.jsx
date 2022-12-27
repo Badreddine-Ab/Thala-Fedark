@@ -94,7 +94,7 @@ export default function AddCommand() {
                 //  onChange={(e) => SetQuantite(e.target.value)}
 
 
-                  // value={command.quantite}
+                  value={command.quantite}
                   onChange={onchange}
                   className="input-box"
                 />
@@ -114,34 +114,9 @@ export default function AddCommand() {
                   onChange={onchange}
                 />
               </div>
-              {/* <div>
-              <label for="gender">Gender</label>
-              <select name="gender" id="gender" className="input-box">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div> */}
+   
             </div>
-            {/* <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label for="email">Email Address</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="input-box"
-              />
-            </div>
-            <div>
-              <label for="phone">Phone number</label>
-              <input
-                type="text"
-                name="phone"
-                id="phone"
-                className="input-box"
-              />
-            </div>
-          </div> */}
+           
           </div>
 
           <div className="mt-4">

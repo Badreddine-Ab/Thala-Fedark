@@ -9,7 +9,7 @@ function Search() {
 
   const { data, error, loading } = useQuery(Get_PRODUITS);
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>something went wrong...</div>;
+  if (error) return <div className="text-red">wrong:{error.message}</div>;
 
 
   return (
