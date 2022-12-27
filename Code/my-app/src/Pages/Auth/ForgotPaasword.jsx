@@ -57,7 +57,7 @@ export default function FORGOT() {
                         <a href="">
                             {/* <img src={Logo} className='w-40' alt="" /> */}
                         </a>
-                        <p className='text-lg text-gray-600'>Hey welcome back 👋 Login first</p>
+                        <p className='text-lg text-gray-600'>You can reset it now 💪</p>
                     </div>
 
                     
@@ -80,11 +80,12 @@ export default function FORGOT() {
                         
 
                         <div className='flex flex-col'>
-                            <button type='submit' className='block w-full px-7 py-3 rounded-xl bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-500 active:bg-yellow-500'>
-                                <span className='text-lg text-white'>forgot</span>
+                            <button type='submit' className='bg-primary border border-primary text-white px-8 py-3 font-medium 
+                    rounded-md'>
+                                <span className='text-lg text-white'>Recover password</span>
                             </button>
                             <p className='p-1 text-center'>
-                                <span className='text-yellow-300'><NavLink to="/register">Create new account</NavLink></span>
+                                <span className='text-primary'><NavLink to="/register">Back to login</NavLink></span>
                             </p>
                         </div>
                     </form>

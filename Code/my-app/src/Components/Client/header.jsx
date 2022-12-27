@@ -99,12 +99,14 @@ export default function Header() {
                 </>:
                 <>
                 <div></div>
+                <Link to="/login">
                 <a
-                  href="pages/login.html"
+                  href="#"
                   className="text-gray-200 hover:text-white transition"
                 >
                   Login
                 </a>
+                </Link>
                 </>
                 }
               </div>

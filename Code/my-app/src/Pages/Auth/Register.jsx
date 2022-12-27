@@ -53,7 +53,7 @@ export default function Register() {
                             {/* <NavLink to="/"> */}
                                 {/* <img src={Logo} className='w-40' alt="" /> */}
                             {/* </NavLink> */}
-                            <p className='text-lg text-gray-600'>Welcome to Marhaba ! It's quick and easy 💛</p>
+                            <p className='text-lg text-gray-600'>Welcome to Marhaba ! It's quick and easy ❤️</p>
                         </div>
 
                         
