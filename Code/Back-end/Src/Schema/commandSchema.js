@@ -25,18 +25,17 @@ module.exports = gql`
   type product_commande {
     id: ID
     product: Product
-    Commande: Commande
+    commande: Commande
   }
 
   type Query {
-    Querycommande: [Commande]
+    Querycommande: [product_commande]
     Countcommande: Int
     StatistiqueAchats(StartDate: String!, EndDate: String!): Int
   }
 
   type Mutation {
     AddCommand(
-      prixTotal: Float!
       quantite: Int!
       idUser: ID!
       product: ID!
