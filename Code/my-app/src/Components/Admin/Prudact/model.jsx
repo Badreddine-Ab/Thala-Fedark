@@ -23,21 +23,11 @@ const Modal = (props) => {
     try {
       const { description, name, prix, stock, categorieId } = Data;
       e.preventDefault();
-      // images.map((image) => (
-        
-      // ))
-      console.log(images[0])
-      // images.map((image)=>{
-      //   console.log(image)
-      // })
-    
-
       if (description || name || prix || stock || categorieId) {
         createProduct({
           variables: {
             input: {
               description: description,
-              // images: "images",
               name: name,
               prix: parseFloat(prix),
               stock: parseInt(stock),
@@ -46,9 +36,6 @@ const Modal = (props) => {
                 {
                   path:images
                 },
-                // {
-                //   path: "image2.png"
-                // }
               ],
             },
           },

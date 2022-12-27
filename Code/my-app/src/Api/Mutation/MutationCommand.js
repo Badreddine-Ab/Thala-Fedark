@@ -6,10 +6,8 @@ export const Delete_Command = gql`
 `;
 
 export const Add_Command = gql`
-mutation AddCommand($prixTotal: Float!, $quantite: Int!, $idUser: ID!) {
-  AddCommand(prixTotal: $prixTotal, quantite: $quantite, idUser: $idUser) {
-    id
-  }
+mutation AddCommand( $quantite: Int!, $idUser: ID!,product: ID!: ID!) {
+  AddCommand( quantite: $quantite, idUser: $idUser,product:product ) 
 }
 `;
 
