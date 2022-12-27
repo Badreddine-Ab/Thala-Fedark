@@ -9,13 +9,18 @@ const Product = require("../../Models/productModel");
 module.exports = {
   Query: {
     Querycommande: async () => {
-      return await Commande.findAll({
+      return await product_commande.findAll({
         order: [["id", "DESC"]],
         include:user ,
+        include:[
+          {model: Product ,required: true},
+          {model: Commande,required: true,include:user}
+        ],
         raw: true,
         nest: true,
       });
     },
+    
     StatistiqueAchats: async (_, args) => {
       let { StartDate, EndDate } = args;
       if (!StartDate || !EndDate)
