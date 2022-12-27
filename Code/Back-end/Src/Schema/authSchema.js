@@ -1,7 +1,7 @@
 
-const { gql } = require( 'apollo-server-express');
+const { gql } = require('apollo-server-express');
 
-module.exports= gql`
+module.exports = gql`
 type User{
     id : Int,
     name : String,
@@ -19,8 +19,8 @@ extend type Query{
 extend type Mutation{
     signup(name : String!, email : String! , password : String!, role : String!) : User
     login(email : String!, password : String!) : AuthPayload
-    foregetPassword(email : String!) : String
-    resetPassword(password : String! , token : String!) : String
+    foregetPassword(email : String!) : User
+    resetPassword(password : String! , token : String!) : User
 }
 `;
 

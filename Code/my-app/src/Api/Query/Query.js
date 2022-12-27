@@ -18,6 +18,8 @@ export const Get_PRODUITS = gql`
     }
   }
 `;
+
+
 export const FIND_ALL_CATGORIE = gql`
   query Categorie {
     categories {
@@ -40,4 +42,10 @@ export const FIND_ALL_Commande = gql`
       }
     }
   }
+`;
+
+export const CountCommande = gql`
+ query Query {
+  Countcommande
+}
 `;

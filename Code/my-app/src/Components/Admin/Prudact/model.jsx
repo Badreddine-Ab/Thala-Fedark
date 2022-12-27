@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { Add_Produit } from "../../../Api/Mutation/MutationProduct";
 import { FIND_ALL_CATGORIE } from "../../../Api/Query/Query";
-import Upload from "../../Client/upload";
 
 const Modal = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [createProduct] = useMutation(Add_Produit);
   const [Data, SetData] = useState({});
   const [Error, SetError] = useState("");
+  const [images, SetImage] = useState([]);
   const { loading, data, error } = useQuery(FIND_ALL_CATGORIE);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>something went wrong...</div>;
@@ -23,17 +23,33 @@ const Modal = (props) => {
     try {
       const { description, name, prix, stock, categorieId } = Data;
       e.preventDefault();
+      // images.map((image) => (
+        
+      // ))
+      console.log(images[0])
+      // images.map((image)=>{
+      //   console.log(image)
+      // })
+    
 
-      if (description || name || prix || stock) {
+      if (description || name || prix || stock || categorieId) {
         createProduct({
           variables: {
             input: {
               description: description,
-              images: "Image",
+              // images: "images",
               name: name,
               prix: parseFloat(prix),
               stock: parseInt(stock),
               categorieId: parseInt(categorieId),
+              images: [
+                {
+                  path:images
+                },
+                // {
+                //   path: "image2.png"
+                // }
+              ],
             },
           },
         });
@@ -92,7 +108,7 @@ const Modal = (props) => {
                     </span>
                   </div>
                 )}
-                <form onSubmit={handleSubmit}>
+                <form encType="multipart/form-data" onSubmit={handleSubmit}>
                   <div className="col-span-9 shadow rounded px-6 pt-5 pb-7">
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
@@ -112,6 +128,10 @@ const Modal = (props) => {
                             name="categorieId"
                             onChange={handleChange}
                           >
+                            <option value="">
+                              --Please choose an Categorie--
+                            </option>
+
                             {data.categories.map((categorie, i) => {
                               return (
                                 <option value={categorie.id}>
@@ -142,11 +162,6 @@ const Modal = (props) => {
                             className="input-box"
                           />
                         </div>
-
-                        {/* <div>
-                          <label for="phone">Image</label>
-                          <Upload />
-                        </div> */}
                       </div>
                       <div>
                         <label for="last">Description</label>
@@ -157,6 +172,16 @@ const Modal = (props) => {
                           rows="5"
                           cols="33"
                         ></textarea>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4">
+                        <div>
+                          <input
+                            type="file"
+                            name="images"
+                            multiple
+                            onChange={(e) => SetImage(e.target.files)}
+                          />
+                        </div>
                       </div>
                     </div>
 

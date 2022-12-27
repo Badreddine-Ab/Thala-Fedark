@@ -25,6 +25,10 @@ module.exports = {
         where: { createdAt: { [Op.between]: [StartDate, EndDate] } },
       });
     },
+    Countcommande: async()=>{
+      return await Commande.count({})
+    }
+
   },
 
   Mutation: {
@@ -36,21 +40,13 @@ module.exports = {
           throw new Error("Please remplire tous les champs");
         if (products.stock < quantite) throw new Error("greater quantity!");
 
-        const Commandes = await Commande.create({
-          prixTotal: prixTotal,
-          quantite: quantite,
-          etat: "en attend",
-          userId: idUser,
-        });
-        await product_commande.create({
-          productId: product,
-          commandeId: Commandes.id,
-        });
+        const Commandes = await Commande.create({prixTotal: prixTotal, quantite: quantite, etat: "en attend",userId: idUser});
+        await product_commande.create({productId: product,commandeId: Commandes.id});
         if (Commandes) {
           await Product.update({stock: products.stock - quantite},{ where: { id: product }});
         }
-
         return true;
+
       } catch (error) {
         throw error;
       }

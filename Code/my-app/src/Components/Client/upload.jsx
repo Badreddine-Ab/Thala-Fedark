@@ -1,21 +1,28 @@
-import { useMutation } from "@apollo/client";
-import { handleError } from "@apollo/client/link/http/parseAndCheckHttpResponse";
+import { useState } from "react";
 
 export default function Upload() {
   // const [uploadImage]=useMutation(UPLOAD_Image,{
   //     onCompleted:data=>console.log(data)
   // })
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-    if (!file) return;
-    // uploadImage({variables:{file}})
-  };
+  const [Images,setImages]=useState([])
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setImages(file)
+  //   console.log(Images.name);
+  //   if (!file) return;
+  // };
+  const [images, setAllImages] = useState([]);
+  
+  
   return (
     <div>
-      <form action="/profile" method="post">
-        <input type="file" onChange={handleFileChange} />
-      </form>
+   
+        <input type="file"
+        name="images" 
+        multiple
+        onChange={e=>(e.target.value)} 
+        />
+        
     </div>
   );
 }
