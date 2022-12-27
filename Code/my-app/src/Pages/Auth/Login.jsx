@@ -18,10 +18,7 @@ export default function Login() {
     const [login,{data,loading,error}] = useMutation(LOGIN_USER)
 
     if (loading) return <h1>Loading...</h1>
-    if (data){
-        localStorage.setItem("token",data.user.token)
-        navigate('/')
-    }
+  
 
     const handleChange =(e)=> {
         setFormData({
@@ -33,13 +30,16 @@ export default function Login() {
     const handleSubmit = (e)=>{
         const {email,password}=formData
         e.preventDefault()
-        login({
+            login({
             variables:{
                 email: email, password: password
             }
+
+        }).then(res=>{
+                    console.log(res)
+                    navigate('/')
+
         })
-        
-        
     }
 
     return (
