@@ -18,10 +18,7 @@ export default function Login() {
     const [login,{data,loading,error}] = useMutation(LOGIN_USER)
 
     if (loading) return <h1>Loading...</h1>
-    if (data){
-        localStorage.setItem("token",data.user.token)
-        navigate('/')
-    }
+  
 
     const handleChange =(e)=> {
         setFormData({
@@ -33,13 +30,16 @@ export default function Login() {
     const handleSubmit = (e)=>{
         const {email,password}=formData
         e.preventDefault()
-        login({
+            login({
             variables:{
                 email: email, password: password
             }
+
+        }).then(res=>{
+                    console.log(res)
+                    navigate('/')
+
         })
-        
-        
     }
 
     return (
@@ -91,7 +91,7 @@ export default function Login() {
                             />
                             {/* <span className='text-sm text-red-600'>{errors.password ? errors.password : ""}</span>  */}
                             <p className='p-1 px-3 -mr-3'>
-                                {/* <span className='text-yellow-300'><NavLink to="/forgot">Forgot password ?</NavLink></span> */}
+                                <span className='text-primary'><NavLink to="/forgot">Forgot password ?</NavLink></span>
 
                             </p>
                         </div>
