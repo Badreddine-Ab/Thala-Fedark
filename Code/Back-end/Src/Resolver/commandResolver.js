@@ -40,13 +40,13 @@ module.exports = {
   Mutation: {
     AddCommand: async (_, args) => {
       try {
-        const { prixTotal, quantite, idUser, product } = args;
+        const { quantite, idUser, product } = args;
         const products = await Product.findByPk(product);
-        if (!prixTotal || !quantite || !idUser)
+        if (!product || !quantite || !idUser)
           throw new Error("Please remplire tous les champs");
         if (products.stock < quantite) throw new Error("greater quantity!");
 
-        const Commandes = await Commande.create({prixTotal: prixTotal, quantite: quantite, etat: "en attend",userId: idUser});
+        const Commandes = await Commande.create({prixTotal: quantite*products.prix, quantite: quantite, etat: "en attend",userId: idUser});
         await product_commande.create({productId: product,commandeId: Commandes.id});
         if (Commandes) {
           await Product.update({stock: products.stock - quantite},{ where: { id: product }});

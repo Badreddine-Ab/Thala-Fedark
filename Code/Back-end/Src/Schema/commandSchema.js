@@ -36,7 +36,6 @@ module.exports = gql`
 
   type Mutation {
     AddCommand(
-      prixTotal: Float!
       quantite: Int!
       idUser: ID!
       product: ID!
