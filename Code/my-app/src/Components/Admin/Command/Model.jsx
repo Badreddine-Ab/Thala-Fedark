@@ -14,6 +14,7 @@ const EditeModel = (props) => {
         variables: { updateCommandId: props.Etats.id, etat: etat },
       });
       setShowModal(false);
+      window(0)
     } catch (e) {
       console.log(e);
     }
@@ -63,7 +64,10 @@ const EditeModel = (props) => {
                             onChange={(e) => SetEtas(e.target.value)}
                             className="input-box"
                           >
+                              <option value=""> --Please choose-- </option>
+
                             <option value="EN coure">EN coure</option>
+                            <option value="EN attente">EN attente</option>
                             <option value="Termine">Termine</option>
                           </select>
                         </div>

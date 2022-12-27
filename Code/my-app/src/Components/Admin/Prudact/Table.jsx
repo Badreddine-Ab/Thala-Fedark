@@ -27,7 +27,7 @@ export default function Table() {
     console.log("click me");
   };
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>something went wrong...</div>;
+  if (error) return <div>wrong:{error.message}</div>;
 
   return (
     <>

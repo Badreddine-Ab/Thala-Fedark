@@ -47,5 +47,6 @@ module.exports = gql`
 
   type Subscription {
     Selectcommande: [Commande]
+    DeleteCommand(id: ID!): Boolean
   }
 `;

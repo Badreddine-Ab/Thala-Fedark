@@ -64,7 +64,7 @@ useEffect(()=>{
                           <input
                             type="text"
                             name="name"
-                            // value={props.name.}
+                            value={Name}
                             onChange={(e) => SetName(e.target.value)}
                             className="input-box"
                           />

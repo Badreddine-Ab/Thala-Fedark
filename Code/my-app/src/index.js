@@ -10,7 +10,6 @@ import {onError} from '@apollo/client/link/error'
  const Client = new ApolloClient({
   uri:"http://localhost:9090/graphql",
   cache: new InMemoryCache(),
-  connectToDevTools: true,
  })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
